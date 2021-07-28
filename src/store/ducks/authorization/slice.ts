@@ -1,4 +1,3 @@
-import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import { User } from 'types';
 
 interface Authorization {
@@ -11,4 +10,6 @@ const initialState: Authorization = {
   accessToken: null,
   user: null,
   authorized: false,
-}
+};
+
+export default initialState;

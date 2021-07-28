@@ -1,11 +1,7 @@
 import React from 'react';
-
+import Authorization from './view/authorization';
 function App() {
-  return (
-    <div>
-      <h2>app</h2>
-    </div>
-  );
+  return <Authorization />;
 }
 
 export default App;
