@@ -2,24 +2,25 @@ import React from 'react';
 import styled from 'styled-components';
 import bgImage from 'assets/images/authorization/bg.png';
 import headerImage from 'assets/images/icons/acceleristIcon.svg';
-import AuthorizationTabs from 'view/components/AuthorizationTabs';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import AuthorizationTabs from 'view/components/authorization/AuthorizationTabs';
+import { Switch, Route, Redirect } from 'react-router-dom';
 
 const Authorization = () => {
   return (
-    <Router>
-      <Container>
-        <Header>
-          <HeaderIcon src={headerImage} />
-        </Header>
-        <ModalContainer>
-          <Switch>
-            <AuthorizationTabs />
-            <Route path="/reset">Forgot pass</Route>
-          </Switch>
-        </ModalContainer>
-      </Container>
-    </Router>
+    <Container>
+      <Header>
+        <HeaderIcon src={headerImage} />
+      </Header>
+      <ModalContainer>
+        <Switch>
+          <Route path="/" component={AuthorizationTabs} />
+          <Route path="/reset">
+            <label>forgot pass</label>
+          </Route>
+          <Redirect to="/signup" />
+        </Switch>
+      </ModalContainer>
+    </Container>
   );
 };
 
@@ -51,9 +52,15 @@ const HeaderIcon = styled.img`
 const ModalContainer = styled.div`
   margin: 0 auto;
   margin-top: 75px;
-  max-height: 730px;
-  width: 25%;
+  max-height: 630px;
+  width: 454px;
   background-color: #fff;
   border-radius: 10px;
   padding: 40px;
+  box-sizing: border-box;
+  @media (max-width: 375px) {
+    margin-top: 20px;
+    padding: 24px 14px 40px 14px;
+    width: 343px;
+  }
 `;
