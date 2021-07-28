@@ -26,7 +26,7 @@ const AuthorizationTabs = () => {
             Login
           </Tab>
         </Link>
-      </TabsContainer>  
+      </TabsContainer>
       <Switch>
         <Route path="/signup">
           <AuthorizationInput buttonPlaceholder={'Registration'} termsPrivacyShow={true} />

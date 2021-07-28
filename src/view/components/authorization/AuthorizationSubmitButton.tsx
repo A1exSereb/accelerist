@@ -1,14 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 interface AuthorizationButtonProps {
-  onSubmit: void;
+  onSubmit: Function;
   placeholder: string;
 }
 const AuthorizationButton: React.FC<AuthorizationButtonProps> = ({
   onSubmit,
   placeholder,
 }: AuthorizationButtonProps) => {
-  return <Button onSubmit={() => onSubmit}>{placeholder}</Button>;
+  return <Button onSubmit={onSubmit()}>{placeholder}</Button>;
 };
 export default AuthorizationButton;
 const Button = styled.button`
