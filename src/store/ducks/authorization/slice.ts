@@ -1,3 +1,5 @@
+import { createSlice } from '@reduxjs/toolkit';
+import { StoreSlice } from 'store/types/StoreSlice';
 import { User } from 'types';
 
 interface Authorization {
@@ -12,4 +14,10 @@ const initialState: Authorization = {
   authorized: false,
 };
 
-export default initialState;
+const authorizationSlice = createSlice({
+  name: StoreSlice.Authorization,
+  initialState,
+  reducers: {},
+});
+
+export default authorizationSlice.reducer;

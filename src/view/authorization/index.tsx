@@ -2,10 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 import bgImage from 'assets/images/authorization/bg.png';
 import headerImage from 'assets/images/icons/acceleristIcon.svg';
-import AuthorizationTabs from 'view/components/authorization/AuthorizationTabs';
 import { Switch, Route, Redirect } from 'react-router-dom';
+import AuthorizationReset from 'view/components/authorization/AuthReset';
+import AuthorizationLogin from 'view/components/authorization/AuthLogin';
+import AuthorizationSignUp from 'view/components/authorization/AuthSignUp';
 
-const Authorization = () => {
+const Authorization: React.FC = () => {
   return (
     <Container>
       <Header>
@@ -13,10 +15,9 @@ const Authorization = () => {
       </Header>
       <ModalContainer>
         <Switch>
-          <Route path="/" component={AuthorizationTabs} />
-          <Route path="/reset">
-            <label>forgot pass</label>
-          </Route>
+          <Route path="/login" component={AuthorizationLogin} />
+          <Route path="/signup" component={AuthorizationSignUp} />
+          <Route path="/reset" component={AuthorizationReset} />
           <Redirect to="/signup" />
         </Switch>
       </ModalContainer>

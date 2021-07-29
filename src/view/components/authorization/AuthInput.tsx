@@ -5,14 +5,16 @@ import { Link } from 'react-router-dom';
 import hidePassword from 'assets/images/icons/hidepassword.svg';
 
 interface AuthorizationInputProps {
-  showCheckBox?: boolean;
+  login?: boolean;
   buttonPlaceholder: string;
-  termsPrivacyShow?: boolean;
+  signup?: boolean;
+  reset?: boolean;
 }
 const AuthorizationInput: React.FC<AuthorizationInputProps> = ({
-  showCheckBox = false,
+  login = false,
   buttonPlaceholder,
-  termsPrivacyShow = false,
+  signup = false,
+  reset = false,
 }: AuthorizationInputProps) => {
   const [showPassword, setShowPassword] = useState(true);
   const required = (value: string) => (value ? undefined : 'Required');
@@ -20,6 +22,7 @@ const AuthorizationInput: React.FC<AuthorizationInputProps> = ({
   const onSubmit = (value: { email: string; password: string; remember?: boolean }) => {
     console.log(value.email);
     console.log(value.password);
+    console.log(value.remember);
   };
 
   const Error = ({ name }: { name: string }) => (
@@ -36,8 +39,8 @@ const AuthorizationInput: React.FC<AuthorizationInputProps> = ({
     <Style>
       <Form
         onSubmit={onSubmit}
-        initialValues={{ stooge: 'larry', employed: false }}
-        render={({ handleSubmit, form, submitting, pristine, values }) => (
+        initialValues={{ remember: false }}
+        render={({ handleSubmit }) => (
           <form style={{ marginTop: 34 }} onSubmit={handleSubmit}>
             <FlexColumnContainer>
               <InputLabel>Email</InputLabel>
@@ -64,7 +67,7 @@ const AuthorizationInput: React.FC<AuthorizationInputProps> = ({
                 <PasswordImg src={hidePassword} onClick={() => setShowPassword(!showPassword)} />
               </div>
             </FlexColumnContainer>
-            {showCheckBox && (
+            {login && (
               <FlexRowContainer>
                 <div style={{ display: 'flex', alignItems: 'center' }}>
                   <Field name="remember" component="input" type="checkbox" />
@@ -75,7 +78,13 @@ const AuthorizationInput: React.FC<AuthorizationInputProps> = ({
                 </Link>
               </FlexRowContainer>
             )}
-            {termsPrivacyShow && <label> Terms terms terms</label>}
+            {signup && (
+              <TermsOfPrivacy>
+                I agree that by clicking <span>“Registration”</span> I accept the{' '}
+                <Link to="/login">Terms Of Service</Link> and{' '}
+                <Link to="/login">Privacy Policy</Link>
+              </TermsOfPrivacy>
+            )}
 
             <ButtonContainer>
               <Button type="submit">{buttonPlaceholder}</Button>
@@ -88,7 +97,6 @@ const AuthorizationInput: React.FC<AuthorizationInputProps> = ({
 };
 
 export default AuthorizationInput;
-
 const Style = styled.div`
   input {
     width: 100%;
@@ -104,7 +112,7 @@ const Style = styled.div`
     font-size: 12px;
     text-decoration: none;
     &:hover {
-      text-decoration: underline;
+      color: #000;
     }
   }
   input[name='email'] {
@@ -124,6 +132,24 @@ const Style = styled.div`
     color: #800;
     flex-flow: row nowrap;
     justify-content: center;
+  }
+`;
+const TermsOfPrivacy = styled.div`
+  margin-top: 40px;
+  margin-bottom: 16px;
+  color: #737373;
+  font-size: 12px;
+  font-weight: 400;
+  span {
+    color: #000;
+    font-weight: 600;
+  }
+  a {
+    color: #000;
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
   }
 `;
 const PasswordImg = styled.img`
@@ -160,7 +186,7 @@ const FlexRowContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-top: 12px;
-  margin-bottom: 61px;
+  margin-bottom: 31px;
 `;
 const InputLabel = styled.label`
   font-size: 12px;
