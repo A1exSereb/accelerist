@@ -6,7 +6,7 @@ const AuthorizationSignUp: React.FC = () => {
   return (
     <div style={{ textAlign: 'center' }}>
       <AuthorizationHeaderTabs activeTab="signup" />
-      <AuthorizationInput buttonPlaceholder={'Registration'} signup={true} />
+      <AuthorizationInput buttonPlaceholder={'Registration'} signup={true} request={console.log} />
     </div>
   );
 };

@@ -15,3 +15,8 @@ export type User = {
   updatedAt: string | null;
   deletedAt: string | null;
 };
+
+export type SignInDto = {
+  email: string;
+  password: string;
+};

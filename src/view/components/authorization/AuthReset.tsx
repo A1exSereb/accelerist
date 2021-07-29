@@ -9,7 +9,7 @@ const AuthorizationReset: React.FC = () => {
         <h1>Password Reset</h1>
         <div>Enter your email to receive instructions on how to reset your password.</div>
       </TextContainer>
-      <AuthorizationInput buttonPlaceholder={'Reset'} signup={true} />
+      <AuthorizationInput buttonPlaceholder={'Reset'} signup={true} request={console.log} />
     </div>
   );
 };

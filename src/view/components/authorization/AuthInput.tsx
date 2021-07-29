@@ -3,26 +3,32 @@ import styled from 'styled-components';
 import { Field, Form } from 'react-final-form';
 import { Link } from 'react-router-dom';
 import hidePassword from 'assets/images/icons/hidepassword.svg';
+import { useAppDispatch } from 'store/store';
 
 interface AuthorizationInputProps {
   login?: boolean;
   buttonPlaceholder: string;
   signup?: boolean;
   reset?: boolean;
+  request: Function;
 }
 const AuthorizationInput: React.FC<AuthorizationInputProps> = ({
   login = false,
   buttonPlaceholder,
   signup = false,
   reset = false,
+  request,
 }: AuthorizationInputProps) => {
   const [showPassword, setShowPassword] = useState(true);
+  const dispatch = useAppDispatch();
   const required = (value: string) => (value ? undefined : 'Required');
 
   const onSubmit = (value: { email: string; password: string; remember?: boolean }) => {
+    const { email, password } = value;
     console.log(value.email);
     console.log(value.password);
     console.log(value.remember);
+    dispatch(request({ email, password }));
   };
 
   const Error = ({ name }: { name: string }) => (
