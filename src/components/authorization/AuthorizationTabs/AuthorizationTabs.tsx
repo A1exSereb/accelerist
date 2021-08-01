@@ -1,15 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-interface AuthorizationHeaderTabsProps {
+interface AuthorizationTabsProps {
   activeTab: string;
 }
 
-const AuthorizationHeaderTabs: React.FC<AuthorizationHeaderTabsProps> = ({
+const AuthorizationTabs: React.FC<AuthorizationTabsProps> = ({
   activeTab,
-}: AuthorizationHeaderTabsProps) => {
+}: AuthorizationTabsProps) => {
   return (
-    <div style={{ textAlign: 'center' }}>
+    <Container>
       <Title>Welcome to Accelerist</Title>
       <TabsContainer>
         <Link to="/signup">
@@ -23,11 +23,14 @@ const AuthorizationHeaderTabs: React.FC<AuthorizationHeaderTabsProps> = ({
           </Tab>
         </Link>
       </TabsContainer>
-    </div>
+    </Container>
   );
 };
 
-export default AuthorizationHeaderTabs;
+export default AuthorizationTabs;
+const Container = styled.div`
+  text-align: 'center';
+`;
 const Title = styled.h1`
   font-size: 24px;
   font-weight: 500;

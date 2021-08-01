@@ -1,34 +1,37 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Field, Form } from 'react-final-form';
 import { Link } from 'react-router-dom';
 import hidePassword from 'assets/images/icons/hidepassword.svg';
-import { useAppDispatch } from 'store/store';
+import Button from 'ui/Button';
+/* import TextInput from 'ui/TextInput';
+import { TextInputProps } from 'ui/types'; */
+import { signInThunk } from 'store/ducks/authorization/thunk';
+import { useDispatch } from 'react-redux';
 
-interface AuthorizationInputProps {
+interface AuthorizationInputFormProps {
   login?: boolean;
   buttonPlaceholder: string;
   signup?: boolean;
   reset?: boolean;
   request: Function;
 }
-const AuthorizationInput: React.FC<AuthorizationInputProps> = ({
+const AuthorizationInputForm: React.FC<AuthorizationInputFormProps> = ({
   login = false,
   buttonPlaceholder,
   signup = false,
   reset = false,
   request,
-}: AuthorizationInputProps) => {
+}: AuthorizationInputFormProps) => {
   const [showPassword, setShowPassword] = useState(true);
-  const dispatch = useAppDispatch();
-  const required = (value: string) => (value ? undefined : 'Required');
-
+  const required = (values: string) => (values ? undefined : 'Required');
+  const dispatch = useDispatch();
   const onSubmit = (value: { email: string; password: string; remember?: boolean }) => {
     const { email, password } = value;
     console.log(value.email);
     console.log(value.password);
     console.log(value.remember);
-    dispatch(request({ email, password }));
+    dispatch(signInThunk({ email, password }));
   };
 
   const Error = ({ name }: { name: string }) => (
@@ -49,15 +52,7 @@ const AuthorizationInput: React.FC<AuthorizationInputProps> = ({
         render={({ handleSubmit }) => (
           <form style={{ marginTop: 34 }} onSubmit={handleSubmit}>
             <FlexColumnContainer>
-              <InputLabel>Email</InputLabel>
-              <Error name="email" />
-              <Field
-                name="email"
-                validate={required}
-                component="input"
-                type="text"
-                placeholder="Email"
-              />
+              <Field component="input" name="email" type="text" placeholder="Email" />
             </FlexColumnContainer>
             <FlexColumnContainer>
               <InputLabel>Password</InputLabel>
@@ -92,9 +87,13 @@ const AuthorizationInput: React.FC<AuthorizationInputProps> = ({
               </TermsOfPrivacy>
             )}
 
-            <ButtonContainer>
-              <Button type="submit">{buttonPlaceholder}</Button>
-            </ButtonContainer>
+            <Button
+              buttonCSS={ButtonStyle}
+              containerCSS={ButtonContainer}
+              wrapperCSS={ButtonWrapper}
+              content={buttonPlaceholder}
+              type="submit"
+            />
           </form>
         )}
       />
@@ -102,7 +101,17 @@ const AuthorizationInput: React.FC<AuthorizationInputProps> = ({
   );
 };
 
-export default AuthorizationInput;
+export default AuthorizationInputForm;
+/* const InputStyle = css`
+  box-sizing: border-box;
+  width: 100%;
+  height: 36px;
+  font-weight: 400;
+  border-radius: 6px;
+  border-width: 1px;
+  box-sizing: border-box;
+  padding: 10px;
+`; */
 const Style = styled.div`
   input {
     width: 100%;
@@ -163,15 +172,21 @@ const PasswordImg = styled.img`
   top: 8px;
   right: 10px;
 `;
-const ButtonContainer = styled.div`
+const ButtonWrapper = css`
+  box-sizing: border-box;
   height: 46px;
+`;
+const ButtonContainer = css`
+  box-sizing: border-box;
+  height: 100%;
 `;
 const FlexColumnContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 `;
-const Button = styled.button`
+const ButtonStyle = css`
+  box-sizing: border-box;
   height: 100%;
   width: 100%;
   background-color: #2baee0;

@@ -1,7 +1,8 @@
 import React from 'react';
-import AuthorizationInput from './AuthInput';
+import AuthorizationInputForm from '../../../components/authorization/AuthorizationInputForm';
 import styled from 'styled-components';
-
+/* import { Link } from 'react-router-dom';
+ */
 const AuthorizationReset: React.FC = () => {
   return (
     <div style={{ textAlign: 'left' }}>
@@ -9,7 +10,7 @@ const AuthorizationReset: React.FC = () => {
         <h1>Password Reset</h1>
         <div>Enter your email to receive instructions on how to reset your password.</div>
       </TextContainer>
-      <AuthorizationInput buttonPlaceholder={'Reset'} signup={true} request={console.log} />
+      <AuthorizationInputForm buttonPlaceholder={'Reset'} signup={true} request={console.log} />
     </div>
   );
 };

@@ -6,12 +6,14 @@ interface Authorization {
   accessToken: string | null;
   user: User | null;
   authorized: boolean;
+  loading: boolean;
 }
 
 const initialState: Authorization = {
   accessToken: null,
   user: null,
   authorized: false,
+  loading: false,
 };
 
 const authorizationSlice = createSlice({

@@ -1,18 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
-import bgImage from 'assets/images/authorization/bg.png';
-import headerImage from 'assets/images/icons/acceleristIcon.svg';
+import bgImage from 'assets/images/icons/authorization/bg.png';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import AuthorizationReset from 'view/components/authorization/AuthReset';
-import AuthorizationLogin from 'view/components/authorization/AuthLogin';
-import AuthorizationSignUp from 'view/components/authorization/AuthSignUp';
+import AuthorizationReset from 'pages/unauthorized/Reset/AuthReset';
+import AuthorizationLogin from 'pages/unauthorized/Login/AuthLogin';
+import AuthorizationSignUp from 'pages/unauthorized/SignUp/AuthSignUp';
+import AuthorizationHeader from 'components/authorization/AuthorizationHeader';
 
 const Authorization: React.FC = () => {
   return (
     <Container>
-      <Header>
-        <HeaderIcon src={headerImage} />
-      </Header>
+      <AuthorizationHeader />
       <ModalContainer>
         <Switch>
           <Route path="/login" component={AuthorizationLogin} />
@@ -33,21 +31,6 @@ const Container = styled.div`
   background-repeat: no-repeat;
   background-size: cover;
   margin: 0;
-`;
-
-const Header = styled.div`
-  height: 80px;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #092b3f;
-  margin: 0;
-`;
-
-const HeaderIcon = styled.img`
-  height: 36px;
-  width: 201px;
 `;
 
 const ModalContainer = styled.div`
