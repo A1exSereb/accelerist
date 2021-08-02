@@ -35,12 +35,13 @@ const Container = styled.div`
 
 const ModalContainer = styled.div`
   margin: 0 auto;
+  box-sizing: border-box;
   margin-top: 75px;
   max-height: 630px;
   width: 454px;
   background-color: #fff;
   border-radius: 10px;
-  padding: 40px;
+  padding: 30px;
   box-sizing: border-box;
   @media (max-width: 375px) {
     margin-top: 20px;

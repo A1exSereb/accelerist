@@ -1,19 +1,9 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
-import { FieldRenderProps } from 'react-final-form';
+import { Field, FieldRenderProps } from 'react-final-form';
 import styled, { FlattenSimpleInterpolation } from 'styled-components';
 import { TextInputProps } from 'ui/types';
 
-/* const Error = ({ name }: { name: string }) => (
-  <Field
-    name={name}
-    subscription={{ touched: true, error: true }}
-    render={({ meta: { touched, error } }) =>
-      touched && error ? <span className="error">{error}</span> : null
-    }
-  />
-); */
-const TextInput: React.FC<FieldRenderProps<TextInputProps, HTMLElement>> = ({
+const TextInput: React.FC<FieldRenderProps<TextInputProps, HTMLInputElement>> = ({
   label,
   error,
   leftChild,
@@ -21,6 +11,7 @@ const TextInput: React.FC<FieldRenderProps<TextInputProps, HTMLElement>> = ({
   wrapperCSS,
   containerCSS,
   inputCSS,
+  input,
   ...rest
 }: TextInputProps) => {
   return (
@@ -29,10 +20,18 @@ const TextInput: React.FC<FieldRenderProps<TextInputProps, HTMLElement>> = ({
         {label && <LabelContainer>{label}</LabelContainer>}
         <div>
           {leftChild && <div>{leftChild}</div>}
-          <Input {...rest} $CSS={inputCSS} />
+          <Input {...input} {...rest} $CSS={inputCSS} />
           {rightChild && <div>{rightChild}</div>}
         </div>
-        {error && <Error>{error}</Error>}
+        {rest.name && (
+          <Field
+            name={rest.name}
+            subscription={{ touched: true, error: true }}
+            render={({ meta: { touched, error } }) =>
+              touched && error ? <span>{error}</span> : null
+            }
+          />
+        )}
       </Container>
     </Wrapper>
   );
@@ -42,16 +41,27 @@ export default TextInput;
 const LabelContainer = styled.div`
   font-size: 12px;
   color: #737373;
+  align-self: flex-start;
 `;
-const Error = styled.div``;
-const Wrapper = styled('div')<{ $CSS?: FlattenSimpleInterpolation }>`
+/* const Error = styled.div``;
+ */ const Wrapper = styled('div')<{ $CSS?: FlattenSimpleInterpolation }>`
+  width: 100%;
   ${(props) => (props.$CSS ? { ...props.$CSS } : {})}
 `;
 
 const Container = styled('div')<{ $CSS?: FlattenSimpleInterpolation }>`
+  text-align: left;
+  width: 100%;
   ${(props) => (props.$CSS ? { ...props.$CSS } : {})}
 `;
 
 const Input = styled('input')<{ $CSS?: FlattenSimpleInterpolation }>`
+  width: 100%;
+  height: 36px;
+  font-weight: 400;
+  border-radius: 6px;
+  border-width: 1px;
+  box-sizing: border-box;
+  padding: 10px;
   ${(props) => (props.$CSS ? { ...props.$CSS } : {})}
 `;

@@ -13,4 +13,13 @@ export const Api = {
 
     return request.data;
   },
+  async signUp(payload: SignInDto): Promise<{ accessToken: string; user: User }> {
+    const request = await httpClient.post<
+      SignInDto,
+      AxiosResponse<{ accessToken: string; user: User }>
+    >(apiUrls.SignUpUrl, payload);
+    console.log('signUp request', request);
+
+    return request.data;
+  },
 };

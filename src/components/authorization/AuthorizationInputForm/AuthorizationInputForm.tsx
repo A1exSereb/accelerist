@@ -3,11 +3,10 @@ import styled, { css } from 'styled-components';
 import { Field, Form } from 'react-final-form';
 import { Link } from 'react-router-dom';
 import hidePassword from 'assets/images/icons/hidepassword.svg';
+import linkedIn from 'assets/images/icons/linkedInIcon.svg';
 import Button from 'ui/Button';
-/* import TextInput from 'ui/TextInput';
-import { TextInputProps } from 'ui/types'; */
-import { signInThunk } from 'store/ducks/authorization/thunk';
-import { useDispatch } from 'react-redux';
+import TextInput from 'ui/TextInput';
+import { useAppDispatch } from 'store/store';
 
 interface AuthorizationInputFormProps {
   login?: boolean;
@@ -24,44 +23,58 @@ const AuthorizationInputForm: React.FC<AuthorizationInputFormProps> = ({
   request,
 }: AuthorizationInputFormProps) => {
   const [showPassword, setShowPassword] = useState(true);
-  const required = (values: string) => (values ? undefined : 'Required');
-  const dispatch = useDispatch();
-  const onSubmit = (value: { email: string; password: string; remember?: boolean }) => {
-    const { email, password } = value;
+  /*   const required = (value: string) => (value ? undefined : 'Required');
+   */ const dispatch = useAppDispatch();
+  const onSubmit = (value: { email: string; password: string; remember: boolean }) => {
     console.log(value.email);
     console.log(value.password);
     console.log(value.remember);
-    dispatch(signInThunk({ email, password }));
+    dispatch(request(value));
   };
-
-  const Error = ({ name }: { name: string }) => (
-    <Field
-      name={name}
-      subscription={{ touched: true, error: true }}
-      render={({ meta: { touched, error } }) =>
-        touched && error ? <span className="error">{error}</span> : null
-      }
-    />
-  );
 
   return (
     <Style>
       <Form
         onSubmit={onSubmit}
+        validate={(values) => {
+          const errors: {
+            email?: string;
+            password?: string;
+          } = {};
+          if (!values.email) {
+            errors.email = 'Required';
+          }
+          if (!values.password) {
+            errors.password = 'Required';
+          }
+          return errors;
+        }}
         initialValues={{ remember: false }}
         render={({ handleSubmit }) => (
           <form style={{ marginTop: 34 }} onSubmit={handleSubmit}>
             <FlexColumnContainer>
-              <Field component="input" name="email" type="text" placeholder="Email" />
+              <Field
+                component={TextInput}
+                wrapperCSS={InputWrapper}
+                label="Email"
+                name="email"
+                type="text"
+                placeholder="Email"
+              />
             </FlexColumnContainer>
             <FlexColumnContainer>
-              <InputLabel>Password</InputLabel>
-              <Error name="password" />
               <div style={{ width: '100%', position: 'relative' }}>
                 <Field
                   name="password"
-                  validate={required}
-                  component="input"
+                  component={TextInput}
+                  inputCSS={PasswordInput}
+                  label="Password"
+                  rightChild={
+                    <PasswordImg
+                      src={hidePassword}
+                      onClick={() => setShowPassword(!showPassword)}
+                    />
+                  }
                   type={showPassword ? 'password' : 'text'}
                   placeholder="Password"
                 />
@@ -97,31 +110,34 @@ const AuthorizationInputForm: React.FC<AuthorizationInputFormProps> = ({
           </form>
         )}
       />
+      <Footer>
+        <div>or continue with</div>
+        <FooterImg src={linkedIn} />
+      </Footer>
     </Style>
   );
 };
 
 export default AuthorizationInputForm;
-/* const InputStyle = css`
+const Footer = styled.div`
+  align-items: center;
+  text-align: center;
+  font-size: 12px;
+  color: #737373;
+  margin-top: 32px;
+`;
+const FooterImg = styled.img`
+  margin-top: 20px;
+`;
+const PasswordInput = css`
   box-sizing: border-box;
-  width: 100%;
-  height: 36px;
-  font-weight: 400;
-  border-radius: 6px;
-  border-width: 1px;
+  padding-right: 30px;
+`;
+const InputWrapper = css`
   box-sizing: border-box;
-  padding: 10px;
-`; */
+  margin-bottom: 15px;
+`;
 const Style = styled.div`
-  input {
-    width: 100%;
-    height: 36px;
-    font-weight: 400;
-    border-radius: 6px;
-    border-width: 1px;
-    box-sizing: border-box;
-    padding: 10px;
-  }
   .reset {
     color: #737373;
     font-size: 12px;
@@ -129,24 +145,6 @@ const Style = styled.div`
     &:hover {
       color: #000;
     }
-  }
-  input[name='email'] {
-    margin-bottom: 24px;
-  }
-  input[name='password'] {
-    padding-right: 25px;
-    box-sizing: border-box;
-  }
-  input[type='checkbox'] {
-    width: 20px;
-    height: 20px;
-    margin-left: 0;
-  }
-  .error {
-    display: flex;
-    color: #800;
-    flex-flow: row nowrap;
-    justify-content: center;
   }
 `;
 const TermsOfPrivacy = styled.div`
@@ -169,7 +167,7 @@ const TermsOfPrivacy = styled.div`
 `;
 const PasswordImg = styled.img`
   position: absolute;
-  top: 8px;
+  top: 22px;
   right: 10px;
 `;
 const ButtonWrapper = css`
@@ -208,10 +206,6 @@ const FlexRowContainer = styled.div`
   align-items: center;
   margin-top: 12px;
   margin-bottom: 31px;
-`;
-const InputLabel = styled.label`
-  font-size: 12px;
-  color: #737373;
 `;
 const CheckBoxLabel = styled.label`
   font-size: 12px;

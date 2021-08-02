@@ -4,7 +4,7 @@ import { FlattenSimpleInterpolation } from 'styled-components';
 export interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   error?: string;
-
+  input?: any;
   leftChild?: React.ReactNode;
   rightChild?: React.ReactNode;
 

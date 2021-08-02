@@ -1,7 +1,33 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { Api } from 'service/api';
-import { SignInDto } from 'types';
+import { persistor } from 'store/store';
+import { User } from 'types';
 
-export const signInThunk = createAsyncThunk('authorization/SignIn', (payload: SignInDto) => {
-  console.log(Api.signIn(payload));
+export const signInThunk = createAsyncThunk<
+  {
+    accessToken: string;
+    user: User;
+  },
+  { email: string; password: string; remember: boolean }
+>(
+  'authorization/SignIn',
+  async (payload: { email: string; password: string; remember: boolean }) => {
+    const { email, password, remember } = payload;
+    const res = await Api.signIn({ email, password });
+    localStorage.removeItem('persist:auth');
+    remember ? persistor.persist() : persistor.pause();
+    return res;
+  }
+);
+
+export const signUpThunk = createAsyncThunk<
+  {
+    accessToken: string;
+    user: User;
+  },
+  { email: string; password: string }
+>('authorization/SignUp', async (payload: { email: string; password: string }) => {
+  const { email, password } = payload;
+  const res = await Api.signUp({ email, password });
+  return res;
 });

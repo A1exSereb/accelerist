@@ -1,7 +1,7 @@
 import React from 'react';
 import AuthorizationTabs from '../../../components/authorization/AuthorizationTabs';
-import { signUp } from 'store/ducks/authorization/actions';
 import AuthorizationInputForm from '../../../components/authorization/AuthorizationInputForm';
+import { signUpThunk } from 'store/ducks/authorization/thunk';
 
 const AuthorizationSignUp: React.FC = () => {
   return (
@@ -10,7 +10,7 @@ const AuthorizationSignUp: React.FC = () => {
       <AuthorizationInputForm
         buttonPlaceholder={'Registration'}
         signup={true}
-        request={signUp.request}
+        request={signUpThunk}
       />
     </div>
   );

@@ -1,18 +1,10 @@
 import { applyMiddleware, createStore } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
 import rootReducer from './rootReducer';
-import { persistStore, persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
+import { persistStore } from 'redux-persist';
 import thunkMiddleware from 'redux-thunk';
 
-const persistConfig = {
-  key: 'root',
-  storage,
-};
-
-const persistedReducer = persistReducer(persistConfig, rootReducer);
-
-const store = createStore(persistedReducer, applyMiddleware(thunkMiddleware));
+const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
 
 export default store;
 export const persistor = persistStore(store);
