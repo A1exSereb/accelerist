@@ -7,6 +7,9 @@ import linkedIn from 'assets/images/icons/linkedInIcon.svg';
 import Button from 'ui/Button';
 import TextInput from 'ui/TextInput';
 import { useAppDispatch } from 'store/store';
+import { useSelector } from 'react-redux';
+import { authorizationLoading } from 'store/ducks/authorization/selectors';
+import Spinner from 'ui/Spinner';
 
 interface AuthorizationInputFormProps {
   login?: boolean;
@@ -23,6 +26,7 @@ const AuthorizationInputForm: React.FC<AuthorizationInputFormProps> = ({
   request,
 }: AuthorizationInputFormProps) => {
   const [showPassword, setShowPassword] = useState(true);
+  const authLoading = useSelector(authorizationLoading);
   /*   const required = (value: string) => (value ? undefined : 'Required');
    */ const dispatch = useAppDispatch();
   const onSubmit = (value: { email: string; password: string; remember: boolean }) => {
@@ -104,7 +108,7 @@ const AuthorizationInputForm: React.FC<AuthorizationInputFormProps> = ({
               buttonCSS={ButtonStyle}
               containerCSS={ButtonContainer}
               wrapperCSS={ButtonWrapper}
-              content={buttonPlaceholder}
+              content={!authLoading ? buttonPlaceholder : Spinner}
               type="submit"
             />
           </form>
@@ -195,6 +199,17 @@ const ButtonStyle = css`
   border-width: 0;
   cursor: pointer;
   margin-bottom: 32px;
+  :hover {
+    background-color: #51c2ee;
+  }
+  :focus {
+    background-color: #1da7dc;
+  }
+  :disabled {
+    background-color: #ceedf9;
+    color: #2baee0;
+    cursor: not-allowed;
+  }
   @media (max-width: 375px) {
     margin-bottom: 16px;
   }

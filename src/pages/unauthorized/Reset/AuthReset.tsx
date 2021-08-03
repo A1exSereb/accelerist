@@ -1,17 +1,35 @@
-import React from 'react';
-import AuthorizationInputForm from '../../../components/authorization/AuthorizationInputForm';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import AuthorizationResetForm from 'components/authorization/AuthorizationResetForm';
+import { Link } from 'react-router-dom';
 /* import { Link } from 'react-router-dom';
  */
 const AuthorizationReset: React.FC = () => {
+  const [emailEntered, setEmailEntered] = useState(false);
+
   return (
-    <div style={{ textAlign: 'left' }}>
-      <TextContainer>
-        <h1>Password Reset</h1>
-        <div>Enter your email to receive instructions on how to reset your password.</div>
-      </TextContainer>
-      <AuthorizationInputForm buttonPlaceholder={'Reset'} signup={true} request={console.log} />
-    </div>
+    <>
+      <div style={{ textAlign: 'left', position: 'relative' }}>
+        <TextContainer>
+          <h1>Password Reset</h1>
+          <div>
+            {emailEntered
+              ? 'A link was sent to your email to confirm password reset and create a new one'
+              : 'Enter your email to receive instructions on how to reset your password.'}
+          </div>
+        </TextContainer>
+        <AuthorizationResetForm
+          buttonPlaceholder={'Reset'}
+          emailEntered={emailEntered}
+          request={console.log}
+          setEmailEntered={setEmailEntered}
+        />
+        {emailEntered && <SupportButton>Contact Support</SupportButton>}
+      </div>
+      <ReturnButton>
+        <Link to="/login">Return to Login</Link>
+      </ReturnButton>
+    </>
   );
 };
 
@@ -29,4 +47,25 @@ const TextContainer = styled.div`
     margin-bottom: 8px;
     font-weight: 500;
   }
+`;
+const ReturnButton = styled.button`
+  box-sizing: border-box;
+  background: rgba(18, 36, 52, 0.15);
+  border-radius: 6px;
+  border: none;
+  color: #fff;
+  padding: 9px 14px;
+  text-align: center;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  bottom: 28px;
+  a {
+    text-decoration: none;
+    color: #fff;
+  }
+`;
+
+const SupportButton = styled(ReturnButton)`
+  bottom: -88px;
 `;
