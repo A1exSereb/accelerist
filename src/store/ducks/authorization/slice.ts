@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { StoreSlice } from 'store/types/StoreSlice';
 import { User } from 'types';
-import { signInThunk, signUpThunk } from './thunk';
+import { passwordChangeRequestThunk, signInThunk, signUpThunk } from './thunk';
 
 interface Authorization {
   accessToken: string | null;
@@ -48,6 +48,15 @@ const authorizationSlice = createSlice({
       })
       .addCase(signUpThunk.rejected, (state, action) => {
         state.error = false;
+      })
+      .addCase(passwordChangeRequestThunk.pending, (state, action) => {
+        state.loading = true;
+      })
+      .addCase(passwordChangeRequestThunk.fulfilled, (state, action) => {
+        state.loading = false;
+      })
+      .addCase(passwordChangeRequestThunk.rejected, (state, action) => {
+        state.loading = true;
       });
   },
 });

@@ -34,7 +34,7 @@ export const signUpThunk = createAsyncThunk<
 });
 
 export const passwordChangeRequestThunk = createAsyncThunk<AxiosResponse, { email: string }>(
-  'authorization/SignUp',
+  'authorization/passwordChange',
   async (payload: { email: string }) => {
     const res = await Api.passwordChangeRequest(payload);
     return res;

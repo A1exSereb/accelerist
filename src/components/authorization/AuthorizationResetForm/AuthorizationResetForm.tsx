@@ -18,14 +18,15 @@ interface AuthorizationResetFormProps {
 const AuthorizationResetForm: React.FC<AuthorizationResetFormProps> = ({
   buttonPlaceholder,
   request,
+  emailEntered,
   setEmailEntered,
 }: AuthorizationResetFormProps) => {
   const authLoading = useSelector(authorizationLoading);
   const dispatch = useAppDispatch();
   const onSubmit = (value: { email: string }) => {
     console.log(value.email);
-    setEmailEntered(true);
     dispatch(request(value));
+    setEmailEntered(true);
   };
   const required = (value: string) => (value ? undefined : 'Required');
   return (
@@ -36,7 +37,7 @@ const AuthorizationResetForm: React.FC<AuthorizationResetFormProps> = ({
           <FlexColumnContainer>
             <Field
               component={TextInput}
-              wrapperCSS={InputWrapper}
+              wrapperCSS={!emailEntered ? InputWrapper : HidedInput}
               label="Email"
               name="email"
               error={required}
@@ -59,6 +60,10 @@ const AuthorizationResetForm: React.FC<AuthorizationResetFormProps> = ({
 };
 
 export default AuthorizationResetForm;
+const HidedInput = css`
+  box-sizing: border-box;
+  display: none;
+`;
 const InputWrapper = css`
   box-sizing: border-box;
   margin-bottom: 15px;

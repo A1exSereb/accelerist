@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import AuthorizationResetForm from 'components/authorization/AuthorizationResetForm';
 import { Link } from 'react-router-dom';
+import { passwordChangeRequestThunk } from 'store/ducks/authorization/thunk';
 /* import { Link } from 'react-router-dom';
  */
 const AuthorizationReset: React.FC = () => {
@@ -21,7 +22,7 @@ const AuthorizationReset: React.FC = () => {
         <AuthorizationResetForm
           buttonPlaceholder={'Reset'}
           emailEntered={emailEntered}
-          request={console.log}
+          request={passwordChangeRequestThunk}
           setEmailEntered={setEmailEntered}
         />
         {emailEntered && <SupportButton>Contact Support</SupportButton>}
