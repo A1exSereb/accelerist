@@ -22,4 +22,14 @@ export const Api = {
 
     return request.data;
   },
+
+  async passwordChangeRequest(payload: { email: string }): Promise<AxiosResponse> {
+    const request = await httpClient.post<{ email: string }, AxiosResponse>(
+      apiUrls.ChangePasswordEmail,
+      payload
+    );
+    console.log('change pass request', request);
+
+    return request;
+  },
 };

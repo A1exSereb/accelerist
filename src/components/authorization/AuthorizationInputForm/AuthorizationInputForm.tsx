@@ -10,25 +10,24 @@ import { useAppDispatch } from 'store/store';
 import { useSelector } from 'react-redux';
 import { authorizationLoading } from 'store/ducks/authorization/selectors';
 import Spinner from 'ui/Spinner';
+import { AuthorizationButton } from 'styled/styled';
 
 interface AuthorizationInputFormProps {
   login?: boolean;
   buttonPlaceholder: string;
   signup?: boolean;
-  reset?: boolean;
   request: Function;
 }
 const AuthorizationInputForm: React.FC<AuthorizationInputFormProps> = ({
   login = false,
   buttonPlaceholder,
   signup = false,
-  reset = false,
   request,
 }: AuthorizationInputFormProps) => {
   const [showPassword, setShowPassword] = useState(true);
   const authLoading = useSelector(authorizationLoading);
-  /*   const required = (value: string) => (value ? undefined : 'Required');
-   */ const dispatch = useAppDispatch();
+  const required = (value: string) => (value ? undefined : 'Required');
+  const dispatch = useAppDispatch();
   const onSubmit = (value: { email: string; password: string; remember: boolean }) => {
     console.log(value.email);
     console.log(value.password);
@@ -40,21 +39,8 @@ const AuthorizationInputForm: React.FC<AuthorizationInputFormProps> = ({
     <Style>
       <Form
         onSubmit={onSubmit}
-        validate={(values) => {
-          const errors: {
-            email?: string;
-            password?: string;
-          } = {};
-          if (!values.email) {
-            errors.email = 'Required';
-          }
-          if (!values.password) {
-            errors.password = 'Required';
-          }
-          return errors;
-        }}
         initialValues={{ remember: false }}
-        render={({ handleSubmit }) => (
+        render={({ handleSubmit, pristine, values }) => (
           <form style={{ marginTop: 34 }} onSubmit={handleSubmit}>
             <FlexColumnContainer>
               <Field
@@ -63,6 +49,8 @@ const AuthorizationInputForm: React.FC<AuthorizationInputFormProps> = ({
                 label="Email"
                 name="email"
                 type="text"
+                error="Required"
+                validate={required}
                 placeholder="Email"
               />
             </FlexColumnContainer>
@@ -73,6 +61,8 @@ const AuthorizationInputForm: React.FC<AuthorizationInputFormProps> = ({
                   component={TextInput}
                   inputCSS={PasswordInput}
                   label="Password"
+                  validate={required}
+                  error="Required"
                   rightChild={
                     <PasswordImg
                       src={hidePassword}
@@ -105,10 +95,11 @@ const AuthorizationInputForm: React.FC<AuthorizationInputFormProps> = ({
             )}
 
             <Button
-              buttonCSS={ButtonStyle}
+              buttonCSS={AuthorizationButton}
               containerCSS={ButtonContainer}
               wrapperCSS={ButtonWrapper}
-              content={!authLoading ? buttonPlaceholder : Spinner}
+              disabled={pristine}
+              content={authLoading ? buttonPlaceholder : Spinner}
               type="submit"
             />
           </form>
@@ -186,33 +177,6 @@ const FlexColumnContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-`;
-const ButtonStyle = css`
-  box-sizing: border-box;
-  height: 100%;
-  width: 100%;
-  background-color: #2baee0;
-  border-radius: 6px;
-  text-align: center;
-  align-items: center;
-  color: #fff;
-  border-width: 0;
-  cursor: pointer;
-  margin-bottom: 32px;
-  :hover {
-    background-color: #51c2ee;
-  }
-  :focus {
-    background-color: #1da7dc;
-  }
-  :disabled {
-    background-color: #ceedf9;
-    color: #2baee0;
-    cursor: not-allowed;
-  }
-  @media (max-width: 375px) {
-    margin-bottom: 16px;
-  }
 `;
 const FlexRowContainer = styled.div`
   display: flex;

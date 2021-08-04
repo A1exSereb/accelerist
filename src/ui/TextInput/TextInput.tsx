@@ -1,9 +1,9 @@
 import React from 'react';
-import { Field, FieldRenderProps } from 'react-final-form';
+import { FieldRenderProps } from 'react-final-form';
 import styled, { FlattenSimpleInterpolation } from 'styled-components';
 import { TextInputProps } from 'ui/types';
 
-const TextInput: React.FC<FieldRenderProps<TextInputProps, HTMLInputElement>> = ({
+const TextInput: React.FC<FieldRenderProps<string, HTMLInputElement>> = ({
   label,
   error,
   leftChild,
@@ -11,6 +11,7 @@ const TextInput: React.FC<FieldRenderProps<TextInputProps, HTMLInputElement>> = 
   wrapperCSS,
   containerCSS,
   inputCSS,
+  meta,
   input,
   ...rest
 }: TextInputProps) => {
@@ -23,15 +24,7 @@ const TextInput: React.FC<FieldRenderProps<TextInputProps, HTMLInputElement>> = 
           <Input {...input} {...rest} $CSS={inputCSS} />
           {rightChild && <div>{rightChild}</div>}
         </div>
-        {rest.name && (
-          <Field
-            name={rest.name}
-            subscription={{ touched: true, error: true }}
-            render={({ meta: { touched, error } }) =>
-              touched && error ? <span>{error}</span> : null
-            }
-          />
-        )}
+        {meta.touched && meta.error && <ErrorContainer>{error}</ErrorContainer>}
       </Container>
     </Wrapper>
   );
@@ -42,6 +35,10 @@ const LabelContainer = styled.div`
   font-size: 12px;
   color: #737373;
   align-self: flex-start;
+`;
+const ErrorContainer = styled.div`
+  font-size: 12px;
+  color: #691616;
 `;
 /* const Error = styled.div``;
  */ const Wrapper = styled('div')<{ $CSS?: FlattenSimpleInterpolation }>`

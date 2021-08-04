@@ -7,6 +7,7 @@ const ButtonUI: React.FC<ButtonProps> = ({
   rightChild,
   leftChild,
   wrapperCSS,
+  disabled,
   containerCSS,
   buttonCSS,
   ...rest
@@ -15,7 +16,7 @@ const ButtonUI: React.FC<ButtonProps> = ({
     <Wrapper $CSS={wrapperCSS}>
       {leftChild && <div>{leftChild}</div>}
       <ButtonContainer $CSS={containerCSS}>
-        <Button $CSS={buttonCSS} {...rest}>
+        <Button disabled={disabled} $CSS={buttonCSS} {...rest}>
           {content}
         </Button>
       </ButtonContainer>
