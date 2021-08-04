@@ -1,4 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { AxiosResponse } from 'axios';
 import { Api } from 'service/api';
 import { persistor } from 'store/store';
 import { User } from 'types';
@@ -31,3 +32,11 @@ export const signUpThunk = createAsyncThunk<
   const res = await Api.signUp({ email, password });
   return res;
 });
+
+export const passwordChangeRequestThunk = createAsyncThunk<AxiosResponse, { email: string }>(
+  'authorization/SignUp',
+  async (payload: { email: string }) => {
+    const res = await Api.passwordChangeRequest(payload);
+    return res;
+  }
+);
