@@ -8,6 +8,7 @@ import Spinner from 'ui/Spinner';
 import { useSelector } from 'react-redux';
 import { authorizationLoading } from 'store/ducks/authorization/selectors';
 import { AuthorizationButton } from 'styled/styled';
+import { Loading } from 'store/types/StoreSlice';
 
 interface AuthorizationResetFormProps {
   buttonPlaceholder: string;
@@ -50,7 +51,7 @@ const AuthorizationResetForm: React.FC<AuthorizationResetFormProps> = ({
             containerCSS={ButtonContainer}
             disabled={pristine}
             wrapperCSS={ButtonWrapper}
-            content={authLoading ? buttonPlaceholder : Spinner}
+            content={authLoading === Loading.pending ? Spinner : buttonPlaceholder}
             type="submit"
           />
         </form>

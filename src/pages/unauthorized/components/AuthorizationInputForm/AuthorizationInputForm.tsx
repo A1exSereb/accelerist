@@ -11,6 +11,7 @@ import { useSelector } from 'react-redux';
 import { authorizationLoading } from 'store/ducks/authorization/selectors';
 import Spinner from 'ui/Spinner';
 import { AuthorizationButton } from 'styled/styled';
+import { Loading } from 'store/types/StoreSlice';
 
 interface AuthorizationInputFormProps {
   login?: boolean;
@@ -99,7 +100,7 @@ const AuthorizationInputForm: React.FC<AuthorizationInputFormProps> = ({
               containerCSS={ButtonContainer}
               wrapperCSS={ButtonWrapper}
               disabled={pristine}
-              content={authLoading ? buttonPlaceholder : Spinner}
+              content={authLoading === Loading.pending ? Spinner : buttonPlaceholder}
               type="submit"
             />
           </form>

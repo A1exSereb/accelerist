@@ -1,7 +1,7 @@
 import React from 'react';
 import { signInThunk } from 'store/ducks/authorization/thunk';
-import AuthorizationInputForm from '../../../components/authorization/AuthorizationInputForm/AuthorizationInputForm';
-import AuthorizationTabs from '../../../components/authorization/AuthorizationTabs';
+import AuthorizationInputForm from '../components/AuthorizationInputForm/AuthorizationInputForm';
+import AuthorizationTabs from '../components/AuthorizationTabs';
 
 const AuthorizationLogin: React.FC = () => {
   return (

@@ -21,7 +21,12 @@ const TextInput: React.FC<FieldRenderProps<string, HTMLInputElement>> = ({
         {label && <LabelContainer>{label}</LabelContainer>}
         <div>
           {leftChild && <div>{leftChild}</div>}
-          <Input {...input} {...rest} $CSS={inputCSS} />
+          <Input
+            $error={meta.touched && meta.error ? true : false}
+            {...input}
+            {...rest}
+            $CSS={inputCSS}
+          />
           {rightChild && <div>{rightChild}</div>}
         </div>
         {meta.touched && meta.error && <ErrorContainer>{error}</ErrorContainer>}
@@ -31,7 +36,7 @@ const TextInput: React.FC<FieldRenderProps<string, HTMLInputElement>> = ({
 };
 export default TextInput;
 
-const LabelContainer = styled.div`
+const LabelContainer = styled.label`
   font-size: 12px;
   color: #737373;
   align-self: flex-start;
@@ -52,7 +57,7 @@ const Container = styled('div')<{ $CSS?: FlattenSimpleInterpolation }>`
   ${(props) => (props.$CSS ? { ...props.$CSS } : {})}
 `;
 
-const Input = styled('input')<{ $CSS?: FlattenSimpleInterpolation }>`
+const Input = styled('input')<{ $CSS?: FlattenSimpleInterpolation; $error: boolean }>`
   width: 100%;
   height: 36px;
   font-weight: 400;
@@ -60,5 +65,7 @@ const Input = styled('input')<{ $CSS?: FlattenSimpleInterpolation }>`
   border-width: 1px;
   box-sizing: border-box;
   padding: 10px;
+  background-color: ${(props) => props.$error && '#FFF2F2'};
+  border-color: ${(props) => props.$error && '#F05658'};
   ${(props) => (props.$CSS ? { ...props.$CSS } : {})}
 `;

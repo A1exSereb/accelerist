@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import AuthorizationResetForm from 'components/authorization/AuthorizationResetForm';
+import AuthorizationResetForm from 'pages/unauthorized/Reset/components/AuthorizationResetForm';
 import { Link } from 'react-router-dom';
 import { passwordChangeRequestThunk } from 'store/ducks/authorization/thunk';
 /* import { Link } from 'react-router-dom';
