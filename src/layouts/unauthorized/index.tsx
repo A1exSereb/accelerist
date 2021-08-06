@@ -1,18 +1,17 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import React from 'react';
+import React, { ReactNode } from 'react';
 import styled from 'styled-components';
 import bgImage from 'assets/images/icons/authorization/bg.png';
 import AuthorizationHeader from './Header';
 
-const AuthorizationLayout: React.FC<{ child: JSX.Element }> = ({
-  child,
+const AuthorizationLayout: React.FC<{ children: ReactNode }> = ({
+  children,
 }: {
-  child: JSX.Element;
+  children: React.ReactNode;
 }) => {
   return (
     <Container>
       <AuthorizationHeader />
-      <ModalContainer>{child}</ModalContainer>
+      <ModalContainer>{children}</ModalContainer>
     </Container>
   );
 };

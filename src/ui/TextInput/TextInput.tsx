@@ -3,7 +3,7 @@ import { FieldRenderProps } from 'react-final-form';
 import styled, { FlattenSimpleInterpolation } from 'styled-components';
 import { TextInputProps } from 'ui/types';
 
-const TextInput: React.FC<FieldRenderProps<string, HTMLInputElement>> = ({
+const TextInput: React.FC<FieldRenderProps<string, HTMLElement>> = ({
   label,
   error,
   leftChild,

@@ -163,7 +163,7 @@ const TermsOfPrivacy = styled.div`
 `;
 const PasswordImg = styled.img`
   position: absolute;
-  top: 22px;
+  top: 27px;
   right: 10px;
 `;
 const ButtonWrapper = css`
