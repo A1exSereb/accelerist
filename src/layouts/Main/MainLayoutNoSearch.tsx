@@ -3,7 +3,7 @@ import React, { ReactNode } from 'react';
 import styled from 'styled-components';
 import Header from './Header';
 
-const MainLayout: React.FC<{ children: ReactNode }> = ({
+const MainLayoutNoSearch: React.FC<{ children: ReactNode }> = ({
   children,
 }: {
   children: React.ReactNode;
@@ -18,7 +18,7 @@ const MainLayout: React.FC<{ children: ReactNode }> = ({
   );
 };
 
-export default MainLayout;
+export default MainLayoutNoSearch;
 
 const Container = styled.div`
   background-color: #f9f9f9;
