@@ -16,6 +16,8 @@ export const AuthorizationButton = css`
   width: 100%;
   background-color: #2baee0;
   border-radius: 6px;
+  font-weight: 400;
+  font-size: 12px;
   text-align: center;
   align-items: center;
   color: #fff;
@@ -35,5 +37,34 @@ export const AuthorizationButton = css`
   }
   @media (max-width: 375px) {
     margin-bottom: 16px;
+  }
+`;
+
+export const ThirdButton = css`
+  box-sizing: border-box;
+  background-color: #fff;
+  font-weight: 400;
+  font-size: 12px;
+  border-radius: 6px;
+  border-color: #2baee0;
+  text-align: center;
+  align-items: center;
+  color: #122434;
+  border-width: 1px;
+  cursor: pointer;
+  border-style: solid;
+  box-sizing: border-box;
+
+  :hover {
+    background-color: #ebf9ff;
+    color: #2baee0;
+  }
+  :focus {
+    background-color: #caf0ff;
+  }
+  :disabled {
+    background-color: #ceedf9;
+    color: #2baee0;
+    cursor: not-allowed;
   }
 `;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 import MainLayout from 'layouts/Main/MainLayout';
 import Dashboard from 'pages/Main/Dashboard';
 import MainLayoutNoSearch from 'layouts/Main/MainLayoutNoSearch';
@@ -22,6 +22,7 @@ const MainRouter: React.FC = () => {
           </Switch>
         </MainLayoutNoSearch>
       </Route>
+      <Redirect to="/dashboard" />
     </Switch>
   );
 };

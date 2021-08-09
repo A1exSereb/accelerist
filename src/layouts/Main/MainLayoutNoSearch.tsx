@@ -21,6 +21,6 @@ const MainLayoutNoSearch: React.FC<{ children: ReactNode }> = ({
 export default MainLayoutNoSearch;
 
 const Container = styled.div`
-  background-color: #f9f9f9;
+  background-color: #e8e8e8;
   margin: 0;
 `;

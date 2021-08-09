@@ -23,6 +23,6 @@ const MainLayout: React.FC<{ children: ReactNode }> = ({
 export default MainLayout;
 
 const Container = styled.div`
-  background-color: #f9f9f9;
+  background-color: #e8e8e8;
   margin: 0;
 `;
