@@ -47,6 +47,7 @@ export const ThirdButton = css`
   font-size: 12px;
   border-radius: 6px;
   border-color: #2baee0;
+  padding: 5px;
   text-align: center;
   align-items: center;
   color: #122434;

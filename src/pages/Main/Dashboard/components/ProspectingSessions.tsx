@@ -2,15 +2,14 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import { ThirdButton } from 'styled/styled';
 import ButtonUI from 'ui/Button';
+import Avatar from 'assets/images/icons/ava.svg';
+import DashboardHeader from './DashboardHeader';
 
 const ProspectingSessions: React.FC = () => {
   const filtersToMap = ['1filer', 'secFilter', 'And another one'];
   return (
     <>
-      <HeaderContainer>
-        <HeaderTitle>Prospecting Sessions</HeaderTitle>
-        <HeaderText>see more</HeaderText>
-      </HeaderContainer>
+      <DashboardHeader label="Prospecting Sessions" />
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
         <PSContainer>
           <PSTitle>Race for the Cure</PSTitle>
@@ -27,9 +26,68 @@ const ProspectingSessions: React.FC = () => {
               />
             ))}
           </FiltersContainer>
+          <BlockWrapper>
+            <Block>
+              <BlockText>№ of Prospects Available</BlockText>
+              <BlockCount>235</BlockCount>
+            </Block>
+            <Block>
+              <BlockText>№ of Contacts Pursued</BlockText>
+              <BlockCount>72</BlockCount>
+            </Block>
+          </BlockWrapper>
+          <Footer>
+            <div style={{ display: 'flex' }}>
+              <img src={Avatar} style={{ marginRight: 5, borderRadius: 25 }} />
+              <NameContainer>
+                <BlackText>Cowboy Bibop</BlackText>
+                <GrayText>Owner</GrayText>
+              </NameContainer>
+            </div>
+            <DateContainer>
+              <GrayText>Last Activity</GrayText>
+              <BlackText>1 Jul 2020</BlackText>
+            </DateContainer>
+          </Footer>
         </PSContainer>
         <PSContainer>
           <PSTitle>Race for the Cure</PSTitle>
+          <Separator />
+          <FiltersText>Filters</FiltersText>
+          <FiltersContainer>
+            {filtersToMap.map((filter) => (
+              <ButtonUI
+                buttonCSS={ThirdButton}
+                wrapperCSS={FilerBtnWrapper}
+                disabled={false}
+                key={filter}
+                content={filter}
+              />
+            ))}
+          </FiltersContainer>
+          <BlockWrapper>
+            <Block>
+              <BlockText>№ of Prospects Available</BlockText>
+              <BlockCount>235</BlockCount>
+            </Block>
+            <Block>
+              <BlockText>№ of Contacts Pursued</BlockText>
+              <BlockCount>72</BlockCount>
+            </Block>
+          </BlockWrapper>
+          <Footer>
+            <div style={{ display: 'flex' }}>
+              <img src={Avatar} style={{ marginRight: 5, borderRadius: 25 }} />
+              <NameContainer>
+                <BlackText>Cowboy Bibop</BlackText>
+                <GrayText>Owner</GrayText>
+              </NameContainer>
+            </div>
+            <DateContainer>
+              <GrayText>Last Activity</GrayText>
+              <BlackText>1 Jul 2020</BlackText>
+            </DateContainer>
+          </Footer>
         </PSContainer>
       </div>
     </>
@@ -38,26 +96,8 @@ const ProspectingSessions: React.FC = () => {
 
 export default ProspectingSessions;
 
-const HeaderContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-const HeaderTitle = styled.h2`
-  color: #122434;
-  font-size: 24px;
-  font-weight: 500;
-`;
-
-const HeaderText = styled.p`
-  color: #2baee0;
-  font-size: 12px;
-`;
-
 const PSContainer = styled.div`
   width: 536px;
-  height: 312px;
   background-color: #fff;
   border-radius: 6px;
   padding: 24px;
@@ -87,6 +127,74 @@ const FiltersContainer = styled.div`
 `;
 
 const FilerBtnWrapper = css`
+  margin-top: 16px;
+  margin-top: 6px;
   box-sizing: border-box;
   margin-right: 16px;
+`;
+
+const Block = styled.div`
+  padding: 5px;
+  background-color: #f9f9f9;
+  border-radius: 4px;
+  width: 235px;
+  height: 71px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+const BlockText = styled.p`
+  margin: 0;
+  color: #737373;
+  font-weight: 400;
+  font-size: 12px;
+`;
+
+const BlockCount = styled.p`
+  margin: 0;
+  color: #122434;
+  font-size: 24px;
+  font-weight: 500;
+`;
+
+const BlockWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+`;
+
+const Footer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-top: 25px;
+`;
+
+const NameContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+`;
+
+const DateContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-between;
+`;
+
+const BlackText = styled.p`
+  margin: 0;
+  font-size: 12px;
+  font-weight: 500;
+  color: #122434;
+`;
+
+const GrayText = styled.p`
+  margin: 0;
+  color: #737373;
+  font-size: 12px;
+  font-weight: 400;
 `;
