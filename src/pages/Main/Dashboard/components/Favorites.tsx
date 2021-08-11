@@ -15,7 +15,15 @@ const Favorites: React.FC = () => {
               <Subtitle>Priority Rank 12</Subtitle>
             </TextContainer>
           </HeaderContainer>
-          <Footer></Footer>
+          <Footer>
+            <Subtitle>CSR Focus</Subtitle>
+            <ListContainer>
+              <ListItem>Health</ListItem>
+              <ListItem>Health</ListItem>
+              <ListItem>Health</ListItem>
+              <ListItem>Health</ListItem>
+            </ListContainer>
+          </Footer>
         </Block>
       </Container>
     </Wrapper>
@@ -25,7 +33,7 @@ const Favorites: React.FC = () => {
 export default Favorites;
 
 const Container = styled.div`
-  max-height: 498px;
+  height: 498px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -48,6 +56,7 @@ const Block = styled.div`
   justify-content: space-between;
   padding: 24px 50px 24px 24px;
   background-color: #fff;
+  border-radius: 6px;
 `;
 
 const Image = styled.img`
@@ -89,4 +98,40 @@ const Subtitle = styled.p`
   overflow: hidden;
 `;
 
-const Footer = styled.div``;
+const Footer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
+
+const ListContainer = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  overflow: hidden;
+  flex-wrap: nowrap;
+`;
+
+const ListItem = styled.p`
+  margin: 0;
+  color: #122434;
+  font-size: 12px;
+  font-weight: 500;
+  margin-right: 5px;
+  overflow: hidden;
+  &:not(:first-child) {
+    &::before {
+      content: '';
+      align-self: center;
+      text-align: center;
+      display: inline-block;
+      margin-bottom: 2px;
+      width: 4px;
+      height: 4px;
+      margin-right: 5px;
+      -moz-border-radius: 7.5px;
+      -webkit-border-radius: 7.5px;
+      border-radius: 7.5px;
+      background-color: #c4c4c4;
+    }
+  }
+`;

@@ -97,7 +97,7 @@ const ProspectingSessions: React.FC = () => {
 export default ProspectingSessions;
 
 const PSContainer = styled.div`
-  width: 536px;
+  width: 46%;
   background-color: #fff;
   border-radius: 6px;
   padding: 24px;
