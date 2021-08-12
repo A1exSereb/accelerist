@@ -4,6 +4,7 @@ import MainSubheader from '../components/Subheader';
 import EmptyFavorites from './components/EmptyFavorites';
 import Favorites from './components/Favorites';
 import ProspectingSessions from './components/ProspectingSessions';
+import ProspectNavigator from './components/ProspectNavigator';
 import Reports from './components/Reports';
 
 const Dashboard: React.FC = () => {
@@ -17,6 +18,7 @@ const Dashboard: React.FC = () => {
           {favArr.length > 0 ? <Favorites /> : <EmptyFavorites />}
           <Reports />
         </div>
+        <ProspectNavigator />
       </DashboardContainer>
     </>
   );
