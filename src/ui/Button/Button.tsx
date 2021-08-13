@@ -30,9 +30,13 @@ const Wrapper = styled('div')<{ $CSS?: FlattenSimpleInterpolation }>`
 `;
 
 const Button = styled('button')<{ $CSS?: FlattenSimpleInterpolation }>`
+  width: 100%;
+  height: 100%;
   ${(props) => (props.$CSS ? { ...props.$CSS } : {})}
 `;
 
 const ButtonContainer = styled('div')<{ $CSS?: FlattenSimpleInterpolation }>`
+  width: 100%;
+  height: 100%;
   ${(props) => (props.$CSS ? { ...props.$CSS } : {})}
 `;

@@ -16,6 +16,47 @@ export type User = {
   deletedAt: string | null;
 };
 
+export type Company = {
+  id: number;
+  zoomInfoId: number | null;
+  name: string;
+  logo: string | null;
+  ticker: string | null;
+  parentCompany: string | null;
+  phone: number;
+  fax: string | null;
+  website: string | null;
+  city: string;
+  street: string;
+  state: string | null;
+  zipCode: string;
+  country: string;
+  continent: string | null;
+  productsBrandDescription: string | null;
+  descriptionList: string | null;
+  revenueRange: string | null;
+  employeeRange: string | null;
+  twitterHandle: string | null;
+  socialMediaUrls: Array<Array<string>> | null;
+  competitors: string | null;
+  subUnitIndustries: string | null;
+  primaryIndustry: Array<string>;
+  industries: Array<string> | null;
+  revenue: string | null;
+  employeeCount: number;
+  annualContributions: string | null;
+  cashContributions: string | null;
+  inKindContributions: string | null;
+  employeeContributions: string | null;
+  parentId: string | null;
+  parentName: string | null;
+  type: string | null;
+  sdgGoals: string | null;
+  genders: string | null;
+  income: string | null;
+  age: string | null;
+};
+
 export type SignInDto = {
   email: string;
   password: string;
