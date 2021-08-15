@@ -1,5 +1,5 @@
 import { AxiosResponse } from 'axios';
-import { SignInDto, User } from 'types';
+import { Company, Meta, SignInDto, User } from 'types';
 import { apiUrls } from 'utils/apiUrls';
 import httpClient from 'utils/axiosInstance';
 
@@ -31,5 +31,14 @@ export const Api = {
     console.log('change pass request', request);
 
     return request;
+  },
+  async getFavoriteCompanies(): Promise<{
+    items: Array<Company>;
+    meta: Meta;
+  }> {
+    const request = await httpClient.get(apiUrls.favoriteCompanies + '?page=1&limit=10');
+    console.log(request);
+    console.log(request.data);
+    return request.data;
   },
 };

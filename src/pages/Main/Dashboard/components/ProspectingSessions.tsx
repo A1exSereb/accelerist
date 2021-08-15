@@ -97,10 +97,11 @@ const ProspectingSessions: React.FC = () => {
 export default ProspectingSessions;
 
 const PSContainer = styled.div`
-  width: 46%;
+  width: 49%;
   background-color: #fff;
   border-radius: 6px;
   padding: 24px;
+  box-sizing: border-box;
 `;
 
 const PSTitle = styled.h2`
@@ -137,7 +138,7 @@ const Block = styled.div`
   padding: 5px;
   background-color: #f9f9f9;
   border-radius: 4px;
-  width: 235px;
+  width: 47%;
   height: 71px;
   display: flex;
   flex-direction: column;

@@ -17,7 +17,7 @@ export type User = {
 };
 
 export type Company = {
-  id: number;
+  id: string;
   zoomInfoId: number | null;
   name: string;
   logo: string | null;
@@ -38,7 +38,51 @@ export type Company = {
   employeeRange: string | null;
   twitterHandle: string | null;
   socialMediaUrls: Array<Array<string>> | null;
+  competitors: string | null;
+  subUnitIndustries: string | null;
+  primaryIndustry: Array<string>;
+  industries: Array<string> | null;
+  revenue: string | null;
+  employeeCount: number;
+  annualContributions: string | null;
+  cashContributions: string | null;
+  inKindContributions: string | null;
+  employeeContributions: string | null;
+  parentId: string | null;
+  parentName: string | null;
+  type: string | null;
+  sdgGoals: string | null;
+  genders: string | null;
+  income: string | null;
+  age: string | null;
+  ethnicity: any;
+  nonprofit: any;
+  purchase: any;
+  affiliation: any;
+  brands: any;
+  interests: any;
+  typesOfInvestment: any;
+  errorLoadZoomInfo: any;
+  charitablePartners: Array<any>;
+  statusZoomInfo: string | null;
+  loadZoomInfoDate: any;
+  errorLoadZoomInfoDate: any;
+  partnershipLink: string | null;
+  employeeEngagementOpportunities: any;
+  similarCompanies: Array<string> | null;
+  favoriteCompanies: Array<any>;
+  score: number;
+  like: boolean;
+  crsFocus: Array<any>;
 };
+
+export interface Meta {
+  totalItems: number;
+  itemCount: number;
+  itemsPerPage: string;
+  totalPages: number;
+  currentPage: string;
+}
 
 export type SignInDto = {
   email: string;

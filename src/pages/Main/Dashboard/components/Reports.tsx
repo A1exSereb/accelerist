@@ -70,6 +70,7 @@ const Container = styled.div`
   background-color: #fff;
   border-radius: 6px;
   padding: 24px;
+  overflow: hidden;
   box-sizing: border-box;
 `;
 

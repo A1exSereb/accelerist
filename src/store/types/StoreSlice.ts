@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 export enum StoreSlice {
   Authorization = 'authorization',
+  Companies = 'companies',
 }
 
 export enum Loading {
