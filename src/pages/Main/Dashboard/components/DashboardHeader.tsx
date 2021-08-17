@@ -4,16 +4,26 @@ import styled from 'styled-components';
 interface DashboardHeaderProps {
   label: string;
   seeMore?: boolean;
+  onClick?: Function;
 }
 
 const DashboardHeader: React.FC<DashboardHeaderProps> = ({
   label,
   seeMore = true,
+  onClick,
 }: DashboardHeaderProps) => {
   return (
     <HeaderContainer>
       <HeaderTitle>{label}</HeaderTitle>
-      {seeMore && <HeaderText>see more</HeaderText>}
+      {seeMore && (
+        <HeaderText
+          onClick={() => {
+            onClick && onClick();
+          }}
+        >
+          see more
+        </HeaderText>
+      )}
     </HeaderContainer>
   );
 };

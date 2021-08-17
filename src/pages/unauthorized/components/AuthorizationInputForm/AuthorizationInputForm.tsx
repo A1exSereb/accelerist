@@ -100,7 +100,7 @@ const AuthorizationInputForm: React.FC<AuthorizationInputFormProps> = ({
               containerCSS={ButtonContainer}
               wrapperCSS={ButtonWrapper}
               disabled={pristine}
-              content={authLoading === Loading.pending ? Spinner : buttonPlaceholder}
+              content={authLoading === Loading.pending ? <Spinner /> : buttonPlaceholder}
               type="submit"
             />
           </form>

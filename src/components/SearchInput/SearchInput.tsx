@@ -2,11 +2,15 @@ import React from 'react';
 import styled from 'styled-components';
 import searchIcon from 'assets/images/icons/search.svg';
 
-const SearchInput: React.FC = () => {
+interface SearchInputProps {
+  showSearchIcon?: boolean;
+}
+
+const SearchInput: React.FC<SearchInputProps> = ({ showSearchIcon = true }: SearchInputProps) => {
   return (
     <SearchContainer>
       <Search placeholder="Search" />
-      <SearchIcon src={searchIcon} />
+      {showSearchIcon && <SearchIcon src={searchIcon} />}
     </SearchContainer>
   );
 };
@@ -18,7 +22,7 @@ const SearchContainer = styled.div`
 `;
 
 const Search = styled.input`
-  width: 365px;
+  width: 100%;
   height: 36px;
   padding: 9px 40px 9px 24px;
   font-size: 12px;

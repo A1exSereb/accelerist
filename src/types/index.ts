@@ -20,7 +20,7 @@ export type Company = {
   id: string;
   zoomInfoId: number | null;
   name: string;
-  logo: string | null;
+  logo: string | undefined;
   ticker: string | null;
   parentCompany: string | null;
   phone: number;

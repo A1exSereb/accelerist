@@ -11,6 +11,7 @@ interface Companies {
   favoritesCompanies: {
     items: Array<Company | null>;
     meta: Meta;
+    itemsStatic: Array<Company | null>;
   };
   companiesSearch: Array<Company | null>;
   loading: LoadingStatus;
@@ -37,6 +38,7 @@ const initialState: Companies = {
       totalPages: 0,
       currentPage: '0',
     },
+    itemsStatic: [],
   },
   companiesSearch: [],
   loading: Loading.idle,

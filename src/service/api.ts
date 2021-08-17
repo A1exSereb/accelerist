@@ -32,11 +32,14 @@ export const Api = {
 
     return request;
   },
-  async getFavoriteCompanies(): Promise<{
+  async getFavoriteCompanies(payload: { page: number; limit: number }): Promise<{
     items: Array<Company>;
     meta: Meta;
   }> {
-    const request = await httpClient.get(apiUrls.favoriteCompanies + '?page=1&limit=10');
+    const { page, limit } = payload;
+    const request = await httpClient.get(
+      apiUrls.favoriteCompanies + `?page=${page}&limit=${limit}`
+    );
     console.log(request);
     console.log(request.data);
     return request.data;

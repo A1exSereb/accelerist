@@ -4,13 +4,13 @@ import closeBtn from 'assets/images/icons/x.svg';
 
 interface ModalProps {
   showCloseBtn?: boolean;
-  child?: ReactChild;
+  children?: ReactChild;
   headerChild?: ReactChild;
   onCloseBtnClick?: Function;
 }
 const Modal: React.FC<ModalProps> = ({
   showCloseBtn = true,
-  child,
+  children,
   headerChild,
   onCloseBtnClick,
 }: ModalProps) => {
@@ -23,7 +23,7 @@ const Modal: React.FC<ModalProps> = ({
           )}
           {headerChild}
         </ModalHeader>
-        {child}
+        <ChildContainer>{children}</ChildContainer>
       </ModalContainer>
     </ModalWrapper>
   );
@@ -44,24 +44,34 @@ const ModalContainer = styled.div`
   position: absolute;
   left: 50%;
   top: 50%;
+  max-width: 50%;
+  max-height: 70%;
   transform: translate(-50%, -50%);
   background-color: #fff;
   border-radius: 6px;
+  margin: 0 auto;
+  overflow: auto;
+`;
+
+const ChildContainer = styled.div`
   box-sizing: border-box;
   padding: 40px;
-  margin: 0 auto;
+  padding-top: 15px;
 `;
 
 const ModalHeader = styled.div`
   top: 0;
   background: #f2f2f2;
   border-radius: 6px 6px 0px 0px;
+  padding: 30px;
+  box-sizing: border-box;
 `;
 
 const CloseModalBtn = styled.img`
   position: absolute;
   width: 24px;
   height: 24px;
-  top: 0;
-  right: 0;
+  background-color: #f2f2f2;
+  top: 4px;
+  right: 4px;
 `;

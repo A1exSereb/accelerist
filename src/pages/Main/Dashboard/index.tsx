@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import Modal from 'ui/Modal';
 import MainSubheader from '../components/Subheader';
 import Favorites from './components/Favorites';
 import ProspectingSessions from './components/ProspectingSessions';
@@ -18,7 +17,6 @@ const Dashboard: React.FC = () => {
           <Reports />
         </FlexContainer>
         <ProspectNavigator />
-        <Modal />
       </DashboardContainer>
     </>
   );
