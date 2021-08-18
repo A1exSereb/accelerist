@@ -16,9 +16,9 @@ const MainSubheader: React.FC<{
 }) => {
   return (
     <Subheader>
-      {rightChildren && <RightChildrenContainer>{rightChildren}</RightChildrenContainer>}
-      <Subtitle>{label}</Subtitle>
       {leftChildren && <LeftChildrenContainer>{leftChildren}</LeftChildrenContainer>}
+      <Subtitle>{label}</Subtitle>
+      {rightChildren && <RightChildrenContainer>{rightChildren}</RightChildrenContainer>}
     </Subheader>
   );
 };

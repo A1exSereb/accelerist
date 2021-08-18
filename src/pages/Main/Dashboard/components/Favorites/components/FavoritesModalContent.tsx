@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import SearchInput from 'components/SearchInput';
+import SearchInput from 'ui/SearchInput';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -9,10 +9,11 @@ import {
 } from 'store/ducks/companies/selectors';
 import { getFavoriteCompaniesThunk } from 'store/ducks/companies/thunk';
 import { Loading } from 'store/types/StoreSlice';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import Spinner from 'ui/Spinner';
 import ArrowSVG from 'assets/images/icons/pagArrow.svg';
 import { metaProperty } from '@babel/types';
+import { Link } from 'react-router-dom';
 
 const FavoritesModalContent: React.FC = () => {
   const dispatch = useDispatch();
@@ -63,15 +64,29 @@ const FavoritesModalContent: React.FC = () => {
   };
   return (
     <>
-      <SearchInput showSearchIcon={false} />
+      <SearchContainer>
+        <Link to="/search">
+          <SearchInput searchCSS={searchCSS} showSearchIcon={false} />
+        </Link>
+      </SearchContainer>
       {favoritesLoading === Loading.pending ? (
         <Spinner />
       ) : (
         favoritesData.map((company) => {
           return (
-            <div key={company?.id}>
-              <p>{company?.name}</p>
-            </div>
+            <ItemContainer key={company?.id}>
+              <ItemImg src={company?.logo} />
+              <ItemTextContainer>
+                <ColumnContainer>
+                  <ItemTitle>{company?.name}</ItemTitle>
+                  <ItemSubtitle>{company?.type}</ItemSubtitle>
+                </ColumnContainer>
+                <ColumnContainer>
+                  <ItemName>{company?.parentName}</ItemName>
+                  <ItemDate>{company?.loadZoomInfoDate}</ItemDate>
+                </ColumnContainer>
+              </ItemTextContainer>
+            </ItemContainer>
           );
         })
       )}
@@ -100,6 +115,23 @@ const FavoritesModalContent: React.FC = () => {
 
 export default FavoritesModalContent;
 
+const searchCSS = css`
+  box-sizing: border-box;
+  background-color: #f2f2f2;
+  height: 36px;
+  cursor: pointer;
+`;
+
+const SearchContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  margin-bottom: 15px;
+  a {
+    width: 100%;
+    height: 100%;
+  }
+`;
+
 const PrevPage = styled.img``;
 
 const NextPage = styled(PrevPage)`
@@ -108,7 +140,7 @@ const NextPage = styled(PrevPage)`
 
 const PageContainer = styled.div`
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
 `;
 
 const PaginationPage = styled.div`
@@ -128,4 +160,60 @@ const PaginationPage = styled.div`
     background: #caf0ff;
     cursor: not-allowed;
   }
+`;
+
+const ItemContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 433px;
+  height: 58px;
+  align-items: center;
+  margin-bottom: 13px;
+`;
+
+const ItemImg = styled.img`
+  width: 46px;
+  height: 46px;
+  margin-right: 5px;
+  border: 1px solid #e8e8e8;
+  border-radius: 6px;
+  margin-bottom: 13px;
+`;
+
+const ItemTextContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  border-bottom: 1px solid #e8e8e8;
+  padding-bottom: 13px;
+  box-sizing: border-box;
+  overflow: hidden;
+`;
+
+const ItemTitle = styled.h3`
+  margin: 0;
+  color: #122434;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 16px;
+  font-weight: 500;
+`;
+
+const ItemSubtitle = styled.p`
+  color: #737373;
+  font-size: 12px;
+`;
+
+const ColumnContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const ItemDate = styled(ItemSubtitle)``;
+
+const ItemName = styled(ItemTitle)`
+  font-size: 12px;
+  font-weight: 400;
 `;

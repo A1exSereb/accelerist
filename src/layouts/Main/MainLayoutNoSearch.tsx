@@ -1,3 +1,4 @@
+import UserProfile from 'components/UserProfile';
 import MainNavbar from 'pages/Main/components/Navbar';
 import React, { ReactNode } from 'react';
 import styled from 'styled-components';
@@ -12,6 +13,7 @@ const MainLayoutNoSearch: React.FC<{ children: ReactNode }> = ({
     <Container>
       <Header>
         <MainNavbar />
+        <UserProfile />
       </Header>
       {children}
     </Container>

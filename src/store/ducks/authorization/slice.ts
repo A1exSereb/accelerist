@@ -22,7 +22,13 @@ const initialState: Authorization = {
 const authorizationSlice = createSlice({
   name: StoreSlice.Authorization,
   initialState,
-  reducers: {},
+  reducers: {
+    logout: (state) => {
+      state.user = null;
+      state.accessToken = null;
+      state.authorized = false;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(signInThunk.pending, (state, action) => {
@@ -62,3 +68,5 @@ const authorizationSlice = createSlice({
 });
 
 export default authorizationSlice.reducer;
+
+export const { logout } = authorizationSlice.actions;

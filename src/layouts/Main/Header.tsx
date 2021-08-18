@@ -18,7 +18,7 @@ const Header = styled.div`
   width: 100%;
   display: flex;
   padding: 22px 19px;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   box-sizing: border-box;
   background-color: #d5f3ff;

@@ -1,4 +1,4 @@
-import React, { ReactChild } from 'react';
+import React, { ReactChild, useEffect } from 'react';
 import styled from 'styled-components';
 import closeBtn from 'assets/images/icons/x.svg';
 
@@ -14,6 +14,12 @@ const Modal: React.FC<ModalProps> = ({
   headerChild,
   onCloseBtnClick,
 }: ModalProps) => {
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = 'scroll';
+    };
+  }, []);
   return (
     <ModalWrapper>
       <ModalContainer>
@@ -44,8 +50,8 @@ const ModalContainer = styled.div`
   position: absolute;
   left: 50%;
   top: 50%;
-  max-width: 50%;
-  max-height: 70%;
+  max-width: 70%;
+  max-height: 90%;
   transform: translate(-50%, -50%);
   background-color: #fff;
   border-radius: 6px;

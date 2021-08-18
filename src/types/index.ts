@@ -9,7 +9,7 @@ export type User = {
   role: string;
   linkedinLink: string | null;
   isReceivingNotifications: boolean;
-  avatarKey: string | null;
+  avatarKey: string | undefined;
   loggedInAt: string;
   createdAt: string;
   updatedAt: string | null;

@@ -1,15 +1,19 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { FlattenSimpleInterpolation } from 'styled-components';
 import searchIcon from 'assets/images/icons/search.svg';
 
 interface SearchInputProps {
   showSearchIcon?: boolean;
+  searchCSS?: FlattenSimpleInterpolation;
 }
 
-const SearchInput: React.FC<SearchInputProps> = ({ showSearchIcon = true }: SearchInputProps) => {
+const SearchInput: React.FC<SearchInputProps> = ({
+  showSearchIcon = true,
+  searchCSS,
+}: SearchInputProps) => {
   return (
     <SearchContainer>
-      <Search placeholder="Search" />
+      <Search $CSS={searchCSS} placeholder="Search" />
       {showSearchIcon && <SearchIcon src={searchIcon} />}
     </SearchContainer>
   );
@@ -21,7 +25,7 @@ const SearchContainer = styled.div`
   position: relative;
 `;
 
-const Search = styled.input`
+const Search = styled('input')<{ $CSS?: FlattenSimpleInterpolation }>`
   width: 100%;
   height: 36px;
   padding: 9px 40px 9px 24px;
@@ -31,6 +35,7 @@ const Search = styled.input`
   border-radius: 6px;
   border: none;
   box-sizing: border-box;
+  ${(props) => (props.$CSS ? { ...props.$CSS } : {})}
 `;
 
 const SearchIcon = styled.img`

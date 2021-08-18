@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import DashboardHeader from '../DashboardHeader';
-import Modal from 'ui/Modal';
+import Modal from 'components/Modal';
 import FavoritesModalHeader from './components/FavoritesModalHeader';
 import FavoritesModalContent from './components/FavoritesModalContent';
 import { Company, Meta } from 'types';
