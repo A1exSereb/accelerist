@@ -37,6 +37,7 @@ const Container = styled.div`
 const SearchContainer = styled.div`
   width: 40%;
   cursor: pointer;
+  margin: 0 3px;
   &a {
     width: 100%;
     height: 100%;

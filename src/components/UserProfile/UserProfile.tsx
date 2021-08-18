@@ -25,7 +25,7 @@ export default UserProfile;
 const UserProfileContainer = styled.div`
   display: flex;
   justify-content: flex-start;
-  width: 100px;
+  width: 177px;
   margin-left: auto;
   cursor: pointer;
   position: relative;

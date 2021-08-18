@@ -1,20 +1,23 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import styled, { FlattenSimpleInterpolation } from 'styled-components';
 import searchIcon from 'assets/images/icons/search.svg';
 
 interface SearchInputProps {
   showSearchIcon?: boolean;
   searchCSS?: FlattenSimpleInterpolation;
+  rightChild?: ReactNode;
 }
 
 const SearchInput: React.FC<SearchInputProps> = ({
   showSearchIcon = true,
   searchCSS,
+  rightChild,
 }: SearchInputProps) => {
   return (
     <SearchContainer>
       <Search $CSS={searchCSS} placeholder="Search" />
       {showSearchIcon && <SearchIcon src={searchIcon} />}
+      {rightChild}
     </SearchContainer>
   );
 };

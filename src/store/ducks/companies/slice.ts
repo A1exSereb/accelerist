@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { Loading, LoadingStatus, StoreSlice } from 'store/types/StoreSlice';
 import { Company, Meta } from 'types';
-import { getFavoriteCompaniesThunk } from './thunk';
+import { getFavoriteCompaniesThunk, getSearchedCompaniesThunk } from './thunk';
 
 interface Companies {
   companies: {
@@ -11,9 +11,11 @@ interface Companies {
   favoritesCompanies: {
     items: Array<Company | null>;
     meta: Meta;
-    itemsStatic: Array<Company | null>;
   };
-  companiesSearch: Array<Company | null>;
+  companiesSearch: {
+    items: Array<Company | null>;
+    meta: Meta;
+  };
   loading: LoadingStatus;
   error: boolean;
 }
@@ -38,9 +40,17 @@ const initialState: Companies = {
       totalPages: 0,
       currentPage: '0',
     },
-    itemsStatic: [],
   },
-  companiesSearch: [],
+  companiesSearch: {
+    items: [],
+    meta: {
+      totalItems: 0,
+      itemCount: 0,
+      itemsPerPage: '0',
+      totalPages: 0,
+      currentPage: '0',
+    },
+  },
   loading: Loading.idle,
   error: false,
 };
@@ -60,7 +70,20 @@ const companiesSlice = createSlice({
         state.loading = Loading.fulfilled;
       })
       .addCase(getFavoriteCompaniesThunk.rejected, (state, action) => {
-        state.error = false;
+        state.error = true;
+        state.loading = Loading.rejected;
+      })
+      .addCase(getSearchedCompaniesThunk.pending, (state, action) => {
+        state.loading = Loading.pending;
+      })
+      .addCase(getSearchedCompaniesThunk.fulfilled, (state, action) => {
+        state.companiesSearch.items = action.payload.items;
+        state.companiesSearch.meta = action.payload.meta;
+        state.loading = Loading.fulfilled;
+      })
+      .addCase(getSearchedCompaniesThunk.rejected, (state, action) => {
+        state.error = true;
+        state.loading = Loading.rejected;
       });
   },
 });

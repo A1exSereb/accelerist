@@ -5,4 +5,5 @@ export const apiUrls = {
   SignUpUrl: '/auth/sign_up',
   ChangePasswordEmail: 'change_password/send_mail',
   favoriteCompanies: '/companies/favorites',
+  companies: '/companies',
 };

@@ -7,3 +7,5 @@ export const getCompaniesFavoritesMeta = (state: RootState) =>
   state.companies.favoritesCompanies.meta;
 export const getCompaniesMeta = (state: RootState) => state.companies.companies.meta;
 export const getCompaniesLoading = (state: RootState) => state.companies.loading;
+export const getSearchCompanies = (state: RootState) => state.companies.companiesSearch.items;
+export const getSearchCompaniesMeta = (state: RootState) => state.companies.companiesSearch.meta;

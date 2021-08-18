@@ -140,7 +140,7 @@ const NextPage = styled(PrevPage)`
 
 const PageContainer = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
 `;
 
 const PaginationPage = styled.div`

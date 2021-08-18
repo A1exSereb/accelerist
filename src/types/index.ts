@@ -52,7 +52,7 @@ export type Company = {
   parentName: string | null;
   type: string | null;
   sdgGoals: string | null;
-  genders: string | null;
+  genders: Array<string> | null;
   income: string | null;
   age: string | null;
   ethnicity: any;
@@ -70,21 +70,42 @@ export type Company = {
   partnershipLink: string | null;
   employeeEngagementOpportunities: any;
   similarCompanies: Array<string> | null;
-  favoriteCompanies: Array<any>;
+  favoriteCompanies: Array<string>;
   score: number;
   like: boolean;
-  crsFocus: Array<any>;
+  crsFocus: Array<string>;
 };
 
-export interface Meta {
+export type Meta = {
   totalItems: number;
   itemCount: number;
   itemsPerPage: string;
   totalPages: number;
   currentPage: string;
-}
+};
+
+export type GetFavoritesCompaniesDto = {
+  page: number;
+  limit: number;
+};
+
+export type GetCompaniesRequest = {
+  items: Array<Company>;
+  meta: Meta;
+};
+
+export type SearchCompaniesDto = {
+  page: number;
+  limit: number;
+  q?: string;
+};
 
 export type SignInDto = {
   email: string;
   password: string;
+};
+
+export type AuthorizationRequest = {
+  accessToken: string;
+  user: User;
 };
