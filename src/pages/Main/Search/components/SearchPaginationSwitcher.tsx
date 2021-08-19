@@ -13,7 +13,7 @@ const SearchPaginationSwitcher: React.FC<{ meta: Meta }> = ({ meta }: { meta: Me
   return (
     <Container>
       <PrevPage src={ArrowSVG} />
-      <Range>{currentRange()}</Range>
+      <Range>{`${currentRange()} of ${meta.totalItems}`}</Range>
       <NextPage src={ArrowSVG} />
     </Container>
   );
@@ -25,7 +25,7 @@ const Container = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 10%;
+  width: 15%;
 `;
 
 const PrevPage = styled.img`

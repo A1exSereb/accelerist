@@ -6,9 +6,10 @@ import FilterIcon from 'assets/images/icons/searchFilterIcon.svg';
 import SearchHeader from './components/SearchHeader';
 import { useDispatch, useSelector } from 'react-redux';
 import { getSearchedCompaniesThunk } from 'store/ducks/companies/thunk';
-import { getCompaniesLoading } from 'store/ducks/companies/selectors';
+import { getCompaniesLoading, getSearchCompanies } from 'store/ducks/companies/selectors';
 import Spinner from 'ui/Spinner';
 import { Loading } from 'store/types/StoreSlice';
+import SearchItem from './components/SearchItems';
 
 const Search: React.FC = () => {
   const dispatch = useDispatch();
@@ -17,6 +18,7 @@ const Search: React.FC = () => {
     dispatch(getSearchedCompaniesThunk({ page: 1, limit: limit }));
   }, [dispatch]);
   const companiesLoading = useSelector(getCompaniesLoading);
+  const companiesSearch = useSelector(getSearchCompanies);
   return (
     <>
       <MainSubheader
@@ -37,6 +39,11 @@ const Search: React.FC = () => {
       ) : (
         <Container>
           <SearchHeader />
+          <SearchItemContainer>
+            {companiesSearch.map((company) => (
+              <SearchItem key={company && company.id} company={company} />
+            ))}
+          </SearchItemContainer>
         </Container>
       )}
     </>
@@ -51,7 +58,12 @@ const SpinnerContainer = styled.div`
   justify-content: center;
   align-items: center;
 `;
-
+const SearchItemContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-top: 10px;
+`;
 const searchCSS = css`
   box-sizing: border-box;
   width: 715px;

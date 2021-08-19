@@ -5,15 +5,15 @@ import { getFavoriteCompaniesThunk, getSearchedCompaniesThunk } from './thunk';
 
 interface Companies {
   companies: {
-    items: Array<Company & null>;
+    items: Array<Company>;
     meta: Meta;
   };
   favoritesCompanies: {
-    items: Array<Company | null>;
+    items: Array<Company>;
     meta: Meta;
   };
   companiesSearch: {
-    items: Array<Company | null>;
+    items: Array<Company>;
     meta: Meta;
   };
   loading: LoadingStatus;

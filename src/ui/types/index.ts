@@ -17,7 +17,7 @@ export interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
 export interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
   content?: string | React.ReactNode;
   type?: 'button' | 'reset' | 'submit' | undefined;
-  disabled: boolean;
+  disabled?: boolean;
   rightChild?: React.ReactNode;
   leftChild?: React.ReactNode;
 
