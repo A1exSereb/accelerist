@@ -3,10 +3,15 @@ import styled from 'styled-components';
 interface IconSignatureProps {
   label: string;
   iconSource: string;
+  onClick?: Function;
 }
-const IconSignature: React.FC<IconSignatureProps> = ({ iconSource, label }: IconSignatureProps) => {
+const IconSignature: React.FC<IconSignatureProps> = ({
+  iconSource,
+  label,
+  onClick,
+}: IconSignatureProps) => {
   return (
-    <Container>
+    <Container onClick={() => onClick && onClick()}>
       <Icon src={iconSource} />
       <Text>{label}</Text>
     </Container>

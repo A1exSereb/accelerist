@@ -1,7 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { Loading, LoadingStatus, StoreSlice } from 'store/types/StoreSlice';
 import { Company, Meta } from 'types';
-import { getFavoriteCompaniesThunk, getSearchedCompaniesThunk } from './thunk';
+import {
+  getFavoriteCompaniesThunk,
+  getSearchedCompaniesThunk,
+  toggleCompanyLikeThunk,
+} from './thunk';
 
 interface Companies {
   companies: {
@@ -82,6 +86,17 @@ const companiesSlice = createSlice({
         state.loading = Loading.fulfilled;
       })
       .addCase(getSearchedCompaniesThunk.rejected, (state, action) => {
+        state.error = true;
+        state.loading = Loading.rejected;
+      })
+      .addCase(toggleCompanyLikeThunk.fulfilled, (state, action) => {
+        state.companiesSearch.items = state.companiesSearch.items.map((company) => ({
+          ...company,
+          like: action.payload.id === company.id ? !action.payload.like : company.like,
+        }));
+        state.loading = Loading.fulfilled;
+      })
+      .addCase(toggleCompanyLikeThunk.rejected, (state, action) => {
         state.error = true;
         state.loading = Loading.rejected;
       });

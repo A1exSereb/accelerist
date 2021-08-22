@@ -1,6 +1,7 @@
-import React, { ReactChild, useEffect } from 'react';
+import React, { ReactChild } from 'react';
 import styled from 'styled-components';
 import closeBtn from 'assets/images/icons/x.svg';
+import useLockBodyScroll from 'hooks/useLockBodyScroll';
 
 interface ModalProps {
   showCloseBtn?: boolean;
@@ -14,12 +15,7 @@ const Modal: React.FC<ModalProps> = ({
   headerChild,
   onCloseBtnClick,
 }: ModalProps) => {
-  useEffect(() => {
-    document.body.style.overflow = 'hidden';
-    return () => {
-      document.body.style.overflow = 'scroll';
-    };
-  }, []);
+  useLockBodyScroll();
   return (
     <ModalWrapper>
       <ModalContainer>

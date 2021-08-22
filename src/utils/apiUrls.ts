@@ -6,4 +6,6 @@ export const apiUrls = {
   ChangePasswordEmail: 'change_password/send_mail',
   favoriteCompanies: '/companies/favorites',
   companies: '/companies',
+  like: '/like',
+  dislike: '/dislike',
 };

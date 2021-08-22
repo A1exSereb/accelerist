@@ -9,7 +9,15 @@ import uploadIcon from 'assets/images/icons/search/upload.svg';
 import IconSignature from 'ui/IconSignature/IconSignature';
 import SearchPaginationSwitcher from './SearchPaginationSwitcher';
 
-const SearchHeader: React.FC = () => {
+interface SearchHeaderProps {
+  limit: number;
+  showSupportModal: Function;
+}
+
+const SearchHeader: React.FC<SearchHeaderProps> = ({
+  limit,
+  showSupportModal,
+}: SearchHeaderProps) => {
   const searchMeta = useSelector(getSearchCompaniesMeta);
   return (
     <HeaderContainer>
@@ -18,9 +26,13 @@ const SearchHeader: React.FC = () => {
         <SignatureContainer>
           <IconSignature iconSource={saveListIcon} label="Save List" />
           <IconSignature iconSource={uploadIcon} label="Export to Excel" />
-          <IconSignature iconSource={mailIcon} label="Accelerist Support" />
+          <IconSignature
+            iconSource={mailIcon}
+            onClick={showSupportModal}
+            label="Accelerist Support"
+          />
         </SignatureContainer>
-        <SearchPaginationSwitcher meta={searchMeta} />
+        <SearchPaginationSwitcher limit={limit} meta={searchMeta} />
       </Container>
     </HeaderContainer>
   );

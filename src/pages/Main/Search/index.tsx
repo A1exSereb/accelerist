@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
 import SearchInput from 'ui/SearchInput';
 import MainSubheader from '../components/Subheader';
@@ -10,35 +10,58 @@ import { getCompaniesLoading, getSearchCompanies } from 'store/ducks/companies/s
 import Spinner from 'ui/Spinner';
 import { Loading } from 'store/types/StoreSlice';
 import SearchItem from './components/SearchItems';
+import { Field, Form } from 'react-final-form';
+import SupportForm from 'components/SupportForm';
 
 const Search: React.FC = () => {
   const dispatch = useDispatch();
+  const [showSupportModal, setShowSupportModal] = useState(false);
   const limit = 12;
   useEffect(() => {
     dispatch(getSearchedCompaniesThunk({ page: 1, limit: limit }));
   }, [dispatch]);
   const companiesLoading = useSelector(getCompaniesLoading);
   const companiesSearch = useSelector(getSearchCompanies);
+
+  const toggleModal = () => {
+    setShowSupportModal(!showSupportModal);
+  };
+
+  const onSubmit = (values: { search: string }) => {
+    console.log(values);
+    dispatch(getSearchedCompaniesThunk({ page: 1, limit: limit, q: values.search }));
+  };
   return (
     <>
       <MainSubheader
         rightChildren={
-          <SearchInput
-            rightChild={
-              <SearchFilterIcon src={FilterIcon} onClick={() => console.log('openFilter')} />
-            }
-            searchCSS={searchCSS}
+          <Form
+            onSubmit={onSubmit}
+            render={({ handleSubmit }) => (
+              <form onSubmit={handleSubmit}>
+                <Field
+                  rightChild={
+                    <SearchFilterIcon src={FilterIcon} onClick={() => console.log('openFilter')} />
+                  }
+                  name="search"
+                  onBlur={handleSubmit}
+                  searchCSS={searchCSS}
+                  component={SearchInput}
+                />
+              </form>
+            )}
           />
         }
         label="Search"
       />
+      {showSupportModal && <SupportForm onClose={toggleModal} />}
       {companiesLoading === Loading.pending ? (
         <SpinnerContainer>
           <Spinner />
         </SpinnerContainer>
       ) : (
         <Container>
-          <SearchHeader />
+          <SearchHeader limit={limit} showSupportModal={toggleModal} />
           <SearchItemContainer>
             {companiesSearch.map((company) => (
               <SearchItem key={company && company.id} company={company} />

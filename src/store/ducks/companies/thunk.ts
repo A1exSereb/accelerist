@@ -19,3 +19,12 @@ export const getSearchedCompaniesThunk = createAsyncThunk<GetCompaniesRequest, S
     return res;
   }
 );
+
+export const toggleCompanyLikeThunk = createAsyncThunk<
+  { res: boolean; id: string; like: boolean },
+  { id: string; like: boolean }
+>('companies/toggleCompanyLike', async (payload) => {
+  console.log('call set like');
+  const res = await Api.toggleCompanyLike(payload);
+  return { res, ...payload };
+});

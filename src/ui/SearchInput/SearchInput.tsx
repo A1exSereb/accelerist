@@ -1,21 +1,35 @@
 import React, { ReactNode } from 'react';
 import styled, { FlattenSimpleInterpolation } from 'styled-components';
 import searchIcon from 'assets/images/icons/search.svg';
+import { FieldRenderProps } from 'react-final-form';
 
 interface SearchInputProps {
   showSearchIcon?: boolean;
   searchCSS?: FlattenSimpleInterpolation;
   rightChild?: ReactNode;
+  onBlur?: Function;
+  input?: any;
+  meta?: any;
 }
 
-const SearchInput: React.FC<SearchInputProps> = ({
+const SearchInput: React.FC<FieldRenderProps<string, HTMLElement> | SearchInputProps> = ({
   showSearchIcon = true,
   searchCSS,
   rightChild,
+  onBlur,
+  meta,
+  input,
+  ...rest
 }: SearchInputProps) => {
   return (
     <SearchContainer>
-      <Search $CSS={searchCSS} placeholder="Search" />
+      <Search
+        onBlur={() => onBlur && onBlur()}
+        {...input}
+        {...rest}
+        $CSS={searchCSS}
+        placeholder="Search"
+      />
       {showSearchIcon && <SearchIcon src={searchIcon} />}
       {rightChild}
     </SearchContainer>

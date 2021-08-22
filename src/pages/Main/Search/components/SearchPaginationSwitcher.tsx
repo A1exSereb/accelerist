@@ -2,19 +2,53 @@ import React from 'react';
 import styled from 'styled-components';
 import ArrowSVG from 'assets/images/icons/pagArrow.svg';
 import { Meta } from 'types';
+import { useDispatch } from 'react-redux';
+import { getSearchedCompaniesThunk } from 'store/ducks/companies/thunk';
 
-const SearchPaginationSwitcher: React.FC<{ meta: Meta }> = ({ meta }: { meta: Meta }) => {
+const SearchPaginationSwitcher: React.FC<{ limit: number; meta: Meta }> = ({
+  limit,
+  meta,
+}: {
+  limit: number;
+  meta: Meta;
+}) => {
+  const dispatch = useDispatch();
   const currentRange = () => {
     const start = (Number(meta.currentPage) - 1) * Number(meta.itemsPerPage) + 1;
     const end = Math.min(start + Number(meta.itemsPerPage) - 1, meta.totalItems);
     return `${start} - ${end}`;
   };
 
+  const togglePage = ({ action }: { action: string }) => {
+    switch (action) {
+      case 'nextPage':
+        Number(meta.currentPage) !== meta.totalPages &&
+          dispatch(
+            getSearchedCompaniesThunk({
+              page: Number(meta.currentPage) + 1,
+              limit: limit,
+            })
+          );
+        break;
+      case 'prevPage':
+        Number(meta.currentPage) !== 1 &&
+          dispatch(
+            getSearchedCompaniesThunk({
+              page: Number(meta.currentPage) - 1,
+              limit: limit,
+            })
+          );
+        break;
+      default:
+        break;
+    }
+  };
+
   return (
     <Container>
-      <PrevPage src={ArrowSVG} />
+      <PrevPage src={ArrowSVG} onClick={() => togglePage({ action: 'prevPage' })} />
       <Range>{`${currentRange()} of ${meta.totalItems}`}</Range>
-      <NextPage src={ArrowSVG} />
+      <NextPage src={ArrowSVG} onClick={() => togglePage({ action: 'nextPage' })} />
     </Container>
   );
 };

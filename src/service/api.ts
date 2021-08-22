@@ -60,4 +60,12 @@ export const Api = {
     console.log('search request data', request.data);
     return request.data;
   },
+  async toggleCompanyLike(payload: { id: string; like: boolean }): Promise<boolean> {
+    const url = payload.like ? apiUrls.dislike : apiUrls.like;
+    const request = await httpClient.get<{ id: string }, AxiosResponse<boolean>>(
+      apiUrls.companies + `/${payload.id}` + url
+    );
+
+    return request.data;
+  },
 };

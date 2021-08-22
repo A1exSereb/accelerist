@@ -3,9 +3,13 @@ import styled, { css } from 'styled-components';
 import { Company } from 'types';
 import ButtonUI from 'ui/Button';
 import heartIcon from 'assets/images/icons/search/heart.svg';
+import heartGrayIcon from 'assets/images/icons/heartGray.svg';
 import { ThirdButton } from 'styled/styled';
+import { useDispatch } from 'react-redux';
+import { toggleCompanyLikeThunk } from 'store/ducks/companies/thunk';
 
 const SearchItem: React.FC<{ company: Company }> = ({ company }: { company: Company }) => {
+  const dispatch = useDispatch();
   const companyAddress = `${company.city}, ${company.state} ${company.zipCode}`;
   return (
     <Container>
@@ -37,7 +41,11 @@ const SearchItem: React.FC<{ company: Company }> = ({ company }: { company: Comp
           </RevenueContainer>
         </MiddleContainer>
         <BottomContainer>
-          <ButtonUI content={<img src={heartIcon} />} buttonCSS={HeartButtonCss} />
+          <ButtonUI
+            onClick={() => dispatch(toggleCompanyLikeThunk({ id: company.id, like: company.like }))}
+            content={<LikeImg src={company.like ? heartIcon : heartGrayIcon} />}
+            buttonCSS={HeartButtonCss}
+          />
           <ButtonUI content="Profile" buttonCSS={ThirdButton} wrapperCSS={ButtonWrapperCss} />
         </BottomContainer>
       </RSContainer>
@@ -50,6 +58,11 @@ export default SearchItem;
 const ButtonWrapperCss = css`
   width: 80%;
   width: 80%;
+`;
+
+const LikeImg = styled.img`
+  width: 24px;
+  height: 24px;
 `;
 
 const HeartButtonCss = css`

@@ -14,6 +14,14 @@ export interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
   inputCSS?: FlattenSimpleInterpolation;
 }
 
+export interface SelectorProps extends InputHTMLAttributes<HTMLSelectElement> {
+  label?: string;
+  input?: any;
+  meta?: any;
+  containerCSS?: FlattenSimpleInterpolation;
+  inputCSS?: FlattenSimpleInterpolation;
+}
+
 export interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
   content?: string | React.ReactNode;
   type?: 'button' | 'reset' | 'submit' | undefined;
