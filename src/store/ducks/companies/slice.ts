@@ -1,6 +1,6 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Loading, LoadingStatus, StoreSlice } from 'store/types/StoreSlice';
-import { Company, Meta } from 'types';
+import { Company, Filters, Meta } from 'types';
 import {
   getFavoriteCompaniesThunk,
   getSearchedCompaniesThunk,
@@ -20,6 +20,7 @@ interface Companies {
     items: Array<Company>;
     meta: Meta;
   };
+  filters: Filters;
   loading: LoadingStatus;
   error: boolean;
 }
@@ -55,6 +56,7 @@ const initialState: Companies = {
       currentPage: '0',
     },
   },
+  filters: {},
   loading: Loading.idle,
   error: false,
 };
@@ -62,7 +64,12 @@ const initialState: Companies = {
 const companiesSlice = createSlice({
   name: StoreSlice.Companies,
   initialState,
-  reducers: {},
+  reducers: {
+    setFilters: (state, action: PayloadAction<Filters>) => {
+      const clearedFilters: Filters = JSON.parse(JSON.stringify(action.payload));
+      state.filters = clearedFilters;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getFavoriteCompaniesThunk.pending, (state, action) => {
@@ -102,5 +109,7 @@ const companiesSlice = createSlice({
       });
   },
 });
+
+export const { setFilters } = companiesSlice.actions;
 
 export default companiesSlice.reducer;

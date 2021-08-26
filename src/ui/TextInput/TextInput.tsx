@@ -9,6 +9,7 @@ const TextInput: React.FC<FieldRenderProps<string, HTMLElement>> = ({
   leftChild,
   rightChild,
   wrapperCSS,
+  placeholder,
   containerCSS,
   inputCSS,
   meta,
@@ -22,6 +23,7 @@ const TextInput: React.FC<FieldRenderProps<string, HTMLElement>> = ({
         <div>
           {leftChild && <div>{leftChild}</div>}
           <Input
+            placeholder={placeholder}
             $error={meta.touched && meta.error ? true : false}
             {...input}
             {...rest}

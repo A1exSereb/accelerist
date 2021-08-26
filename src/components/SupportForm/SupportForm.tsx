@@ -1,11 +1,11 @@
 import Modal from 'components/Modal';
+import FieldSingleSelect from 'fields/FieldSingleSelect.tsc/FieldSingleSelect';
 import { SupportOptionsEnum } from 'pages/Main/types';
 import React from 'react';
 import { Field, Form } from 'react-final-form';
 import styled, { css } from 'styled-components';
 import { AuthorizationButton } from 'styled/styled';
 import Button from 'ui/Button';
-import Selector from 'ui/Select';
 import TextArea from 'ui/TextArea';
 interface SupportFormProps {
   onClose: Function;
@@ -13,10 +13,8 @@ interface SupportFormProps {
 
 export const SupportForm: React.FC<SupportFormProps> = ({ onClose }: SupportFormProps) => {
   const supportOptions = [
-    'Profile Update Request',
-    'System Bug',
-    'Question for Expert',
-    'System Navigation',
+    { label: 'Profile Update Request', value: 'Profile Update Request' },
+    { label: 'System Bug', value: 'System Bug' },
   ];
   const onSubmit = (value: { text: string; reason: SupportOptionsEnum }) => {
     console.log(value);
@@ -29,13 +27,12 @@ export const SupportForm: React.FC<SupportFormProps> = ({ onClose }: SupportForm
         onSubmit={onSubmit}
         render={({ handleSubmit, pristine }) => (
           <form onSubmit={handleSubmit}>
-            <Field name="reason" label="Reason" component={Selector}>
-              {supportOptions.map((option) => (
-                <option key={option} value={option}>
-                  {option}
-                </option>
-              ))}
-            </Field>
+            <Field
+              name="reason"
+              label="Reason"
+              component={FieldSingleSelect}
+              options={supportOptions}
+            />
             <Field
               name="text"
               label="Text"
@@ -75,6 +72,7 @@ const Input = css`
   box-sizing: border-box;
   height: 90px;
   padding: 10px 16px;
+  font-size: 16px;
 `;
 const ButtonWrapper = css`
   box-sizing: border-box;

@@ -10,7 +10,7 @@ import { components } from 'types/global-types';
 import { apiUrls } from 'utils/apiUrls';
 import httpClient from 'utils/axiosInstance';
 
-const myUrlSearchParams = (init: Record<string, string | number | boolean>) =>
+const myUrlSearchParams = (init: Record<string, string | number | boolean | string[]>) =>
   new URLSearchParams(init as Record<string, string>);
 
 export const Api = {

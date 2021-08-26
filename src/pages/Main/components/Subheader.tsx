@@ -29,7 +29,7 @@ const Subheader = styled.div`
   height: 96px;
   width: 100%;
   display: flex;
-  padding: 24px 24px;
+  padding: 42px 24px;
   justify-content: flex-start;
   font-weight: 500;
   align-items: center;

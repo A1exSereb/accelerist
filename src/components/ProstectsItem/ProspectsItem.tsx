@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import FiltersList from 'components/FiltersList';
+import FiltersList from 'components/FilterList';
 import Avatar from 'assets/images/icons/ava.svg';
 
 export const ProspectsItem: React.FC = () => {

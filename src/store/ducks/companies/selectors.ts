@@ -9,3 +9,4 @@ export const getCompaniesMeta = (state: RootState) => state.companies.companies.
 export const getCompaniesLoading = (state: RootState) => state.companies.loading;
 export const getSearchCompanies = (state: RootState) => state.companies.companiesSearch.items;
 export const getSearchCompaniesMeta = (state: RootState) => state.companies.companiesSearch.meta;
+export const getSearchFilters = (state: RootState) => state.companies.filters;

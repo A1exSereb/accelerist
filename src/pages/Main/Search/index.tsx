@@ -6,30 +6,43 @@ import FilterIcon from 'assets/images/icons/searchFilterIcon.svg';
 import SearchHeader from './components/SearchHeader';
 import { useDispatch, useSelector } from 'react-redux';
 import { getSearchedCompaniesThunk } from 'store/ducks/companies/thunk';
-import { getCompaniesLoading, getSearchCompanies } from 'store/ducks/companies/selectors';
+import {
+  getCompaniesLoading,
+  getSearchCompanies,
+  getSearchFilters,
+} from 'store/ducks/companies/selectors';
 import Spinner from 'ui/Spinner';
 import { Loading } from 'store/types/StoreSlice';
-import SearchItem from './components/SearchItems';
+import SearchItem from '../../../components/SearchItem/SearchItems';
 import { Field, Form } from 'react-final-form';
 import SupportForm from 'components/SupportForm';
+import { setFilters } from 'store/ducks/companies/slice';
+import FiltersForm from 'components/FilterForm';
 
 const Search: React.FC = () => {
   const dispatch = useDispatch();
   const [showSupportModal, setShowSupportModal] = useState(false);
-  const limit = 12;
-  useEffect(() => {
-    dispatch(getSearchedCompaniesThunk({ page: 1, limit: limit }));
-  }, [dispatch]);
+  const [showFilters, setShowFilters] = useState(false);
+  const searchFilters = useSelector(getSearchFilters);
   const companiesLoading = useSelector(getCompaniesLoading);
   const companiesSearch = useSelector(getSearchCompanies);
+  const limit = 12;
+  useEffect(() => {
+    dispatch(getSearchedCompaniesThunk({ page: 1, limit: limit, ...searchFilters }));
+  }, [dispatch, searchFilters]);
 
-  const toggleModal = () => {
-    setShowSupportModal(!showSupportModal);
+  const toggleState = {
+    toggleSupportModal: () => {
+      setShowSupportModal(!showSupportModal);
+    },
+    toggleFilters: () => {
+      setShowFilters(!showFilters);
+    },
   };
 
-  const onSubmit = (values: { search: string }) => {
+  const onSubmit = (values: { q: string }) => {
     console.log(values);
-    dispatch(getSearchedCompaniesThunk({ page: 1, limit: limit, q: values.search }));
+    dispatch(setFilters({ q: values.q }));
   };
   return (
     <>
@@ -41,9 +54,9 @@ const Search: React.FC = () => {
               <form onSubmit={handleSubmit}>
                 <Field
                   rightChild={
-                    <SearchFilterIcon src={FilterIcon} onClick={() => console.log('openFilter')} />
+                    <SearchFilterIcon src={FilterIcon} onClick={toggleState.toggleFilters} />
                   }
-                  name="search"
+                  name="q"
                   onBlur={handleSubmit}
                   searchCSS={searchCSS}
                   component={SearchInput}
@@ -54,21 +67,26 @@ const Search: React.FC = () => {
         }
         label="Search"
       />
-      {showSupportModal && <SupportForm onClose={toggleModal} />}
-      {companiesLoading === Loading.pending ? (
-        <SpinnerContainer>
-          <Spinner />
-        </SpinnerContainer>
-      ) : (
-        <Container>
-          <SearchHeader limit={limit} showSupportModal={toggleModal} />
-          <SearchItemContainer>
-            {companiesSearch.map((company) => (
-              <SearchItem key={company && company.id} company={company} />
-            ))}
-          </SearchItemContainer>
-        </Container>
-      )}
+      <Container>
+        {showFilters && <FiltersForm onClose={toggleState.toggleFilters} />}
+        {showSupportModal && <SupportForm onClose={toggleState.toggleSupportModal} />}
+        {companiesLoading === Loading.pending ? (
+          <SpinnerContainer>
+            <Spinner />
+          </SpinnerContainer>
+        ) : companiesSearch.length > 0 ? (
+          <>
+            <SearchHeader limit={limit} showSupportModal={toggleState.toggleSupportModal} />
+            <SearchItemContainer>
+              {companiesSearch.map((company) => (
+                <SearchItem key={company && company.id} company={company} />
+              ))}
+            </SearchItemContainer>
+          </>
+        ) : (
+          <p>No company</p>
+        )}
+      </Container>
     </>
   );
 };

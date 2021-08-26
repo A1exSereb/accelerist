@@ -1,7 +1,7 @@
 import React from 'react';
 import { FieldRenderProps } from 'react-final-form';
 import styled, { FlattenSimpleInterpolation } from 'styled-components';
-import { TextInputProps } from 'ui/types';
+import { TextAreaProps } from 'ui/types';
 
 const TextArea: React.FC<FieldRenderProps<string, HTMLElement>> = ({
   label,
@@ -14,7 +14,7 @@ const TextArea: React.FC<FieldRenderProps<string, HTMLElement>> = ({
   meta,
   input,
   ...rest
-}: TextInputProps) => {
+}: TextAreaProps) => {
   return (
     <Wrapper $CSS={wrapperCSS}>
       <Container $CSS={containerCSS}>

@@ -1,3 +1,5 @@
+import { AgeRanges, Gender, Income } from './search';
+
 export type User = {
   id: string;
   email: string;
@@ -14,6 +16,23 @@ export type User = {
   createdAt: string;
   updatedAt: string | null;
   deletedAt: string | null;
+};
+
+export type Filters = {
+  sdgGoals?: string[];
+  ethnicities?: string[];
+  income?: Income;
+  ageRanges?: AgeRanges;
+  gender?: Gender;
+  q?: string;
+  industry?: string[];
+  deletedIds?: string[];
+  csrFocusIds?: string[];
+  affinities?: string[];
+  location?: string[];
+  totalAnnualContributors?: string;
+  revenueMin?: string;
+  revenueMax?: string;
 };
 
 export type Company = {
@@ -60,7 +79,7 @@ export type Company = {
   purchase: any;
   affiliation: any;
   brands: any;
-  interests: any;
+  interests: string[];
   typesOfInvestment: any;
   errorLoadZoomInfo: any;
   charitablePartners: Array<any>;
@@ -97,7 +116,6 @@ export type GetCompaniesRequest = {
 export type SearchCompaniesDto = {
   page: number;
   limit: number;
-  q?: string;
 };
 
 export type SignInDto = {

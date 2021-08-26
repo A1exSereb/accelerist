@@ -30,9 +30,11 @@ const SearchItem: React.FC<{ company: Company }> = ({ company }: { company: Comp
           <CSRContainer>
             <CSRTitle>CSR Focus</CSRTitle>
             <div>
-              {company.crsFocus.slice(2).map((csr) => (
-                <CSRItem key={csr}>{csr}</CSRItem>
-              ))}
+              {company.crsFocus.length <= 0 ? (
+                <p style={{ margin: 0 }}>No information</p>
+              ) : (
+                company.crsFocus.slice(2).map((csr) => <CSRItem key={csr}>{csr}</CSRItem>)
+              )}
             </div>
           </CSRContainer>
           <RevenueContainer>
@@ -84,6 +86,7 @@ const HeartButtonCss = css`
   :hover {
     background-color: #ebf9ff;
     color: #e8e8e8;
+    border-color: #be4848;
   }
   :focus {
     background-color: #caf0ff;

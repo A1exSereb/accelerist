@@ -29,4 +29,9 @@ export enum FilterVariant {
     '71-75' = '71-75',
     '75 +' = '75 +',
   }
-  
+
+  export enum Gender {
+    'male' = 'male',
+    'female' = 'female',
+    'both' = 'both',
+  }
