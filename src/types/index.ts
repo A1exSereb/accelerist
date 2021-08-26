@@ -33,6 +33,7 @@ export type Filters = {
   totalAnnualContributors?: string;
   revenueMin?: string;
   revenueMax?: string;
+  scope?: string;
 };
 
 export type Company = {

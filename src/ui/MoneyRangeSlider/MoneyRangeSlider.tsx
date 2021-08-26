@@ -24,7 +24,7 @@ function ThumbLabel({
     index,
     0.1,
     ' - ',
-    (value) => `$${value}M`
+    (value) => `$ ${value}M`
   );
   return (
     <div
@@ -56,7 +56,6 @@ const MoneyRangeSlider: React.FC<Props> = ({
   min = MIN,
   max = MAX,
   onChange,
-  ...rest
 }: Props) => {
   const rangeRef: any = React.useRef<Range>();
   const Thumb = ({ props, index }: any) => (
@@ -85,8 +84,8 @@ const MoneyRangeSlider: React.FC<Props> = ({
           background: getTrackBackground({
             values: values,
             colors: COLORS,
-            min: MIN,
-            max: MAX,
+            min: min,
+            max: max,
           }),
           alignSelf: 'center',
         }}
@@ -105,10 +104,9 @@ const MoneyRangeSlider: React.FC<Props> = ({
       }}
       renderThumb={Thumb}
       renderTrack={Track}
-      step={STEP}
-      min={MIN}
-      max={MAX}
-      {...rest}
+      step={step}
+      min={min}
+      max={max}
     />
   );
 };

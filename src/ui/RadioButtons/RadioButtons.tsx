@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { FieldRenderProps } from 'react-final-form';
 import styled from 'styled-components';
 
 interface SelectOption {
@@ -8,16 +9,16 @@ interface SelectOption {
 
 interface RadioButtonsProps {
   options: SelectOption[];
-  value?: string | number;
-  onChange?: (value: string | undefined | number) => void;
   label?: string;
 }
 
-const RadioButtons = ({ options, value, onChange, label }: RadioButtonsProps) => {
+type Props = RadioButtonsProps & FieldRenderProps<string>;
+
+const RadioButtons = ({ options, input, label }: Props) => {
   const [checkedIndex, setCheckedIndex] = useState(0);
 
   useEffect(() => {
-    const currentIndex = options.findIndex((option) => option.value === value);
+    const currentIndex = options.findIndex((option) => option.value === input.value);
 
     if (currentIndex >= 0) {
       setCheckedIndex(currentIndex);
@@ -25,7 +26,7 @@ const RadioButtons = ({ options, value, onChange, label }: RadioButtonsProps) =>
   }, []);
 
   const handleClick = (nexValue: string | undefined | number, index: number) => {
-    onChange?.(nexValue);
+    input.onChange?.(nexValue);
     setCheckedIndex(index);
   };
 

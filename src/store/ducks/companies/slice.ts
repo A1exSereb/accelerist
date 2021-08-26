@@ -8,10 +8,6 @@ import {
 } from './thunk';
 
 interface Companies {
-  companies: {
-    items: Array<Company>;
-    meta: Meta;
-  };
   favoritesCompanies: {
     items: Array<Company>;
     meta: Meta;
@@ -26,16 +22,6 @@ interface Companies {
 }
 
 const initialState: Companies = {
-  companies: {
-    items: [],
-    meta: {
-      totalItems: 0,
-      itemCount: 0,
-      itemsPerPage: '0',
-      totalPages: 0,
-      currentPage: '0',
-    },
-  },
   favoritesCompanies: {
     items: [],
     meta: {

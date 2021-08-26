@@ -1,6 +1,7 @@
 import { AxiosResponse } from 'axios';
 import {
   AuthorizationRequest,
+  Filters,
   GetCompaniesRequest,
   GetFavoritesCompaniesDto,
   SearchCompaniesDto,
@@ -9,9 +10,18 @@ import {
 import { components } from 'types/global-types';
 import { apiUrls } from 'utils/apiUrls';
 import httpClient from 'utils/axiosInstance';
+import queryString from 'query-string';
 
-const myUrlSearchParams = (init: Record<string, string | number | boolean | string[]>) =>
-  new URLSearchParams(init as Record<string, string>);
+const paramsToQueryString = (hash: any) => {
+  const params = queryString.stringify(hash, {
+    arrayFormat: 'bracket',
+  });
+
+  return params ? `?${params}` : '';
+};
+
+/* const myUrlSearchParams = (init: Record<string, string | number | boolean | string[]>) =>
+  new URLSearchParams(init as Record<string, string>); */
 
 export const Api = {
   async signIn(payload: SignInDto): Promise<AuthorizationRequest> {
@@ -43,18 +53,55 @@ export const Api = {
     return request;
   },
   async getFavoriteCompanies(payload: GetFavoritesCompaniesDto): Promise<GetCompaniesRequest> {
-    const params = myUrlSearchParams(payload).toString();
+    const params = paramsToQueryString(payload);
     console.log(params);
-    const request = await httpClient.get(apiUrls.favoriteCompanies + `?${params}`);
+    const request = await httpClient.get(apiUrls.favoriteCompanies + `${params}`);
     console.log('get favorite companies request', request);
     console.log('get favorite companies request data', request.data);
     return request.data;
   },
-  async getSearchedCompanies(payload: SearchCompaniesDto): Promise<GetCompaniesRequest> {
-    const params = myUrlSearchParams(payload).toString();
+  async getSearchedCompanies(payload: SearchCompaniesDto & Filters): Promise<GetCompaniesRequest> {
+    const {
+      page,
+      limit,
+      q,
+      industry,
+      location,
+      scope,
+      sdgGoals,
+      totalAnnualContributors,
+      revenueMin,
+      revenueMax,
+      affinities,
+      gender,
+      ageRanges,
+      csrFocusIds,
+      income,
+      ethnicities,
+      deletedIds,
+    } = payload;
+    const params = paramsToQueryString({
+      page,
+      limit,
+      q,
+      industry,
+      location,
+      scope,
+      sdgGoals,
+      totalAnnualContributors,
+      revenueMin,
+      revenueMax,
+      affinities,
+      gender,
+      ageRanges,
+      csrFocusIds,
+      income,
+      ethnicities,
+      deletedIds,
+    });
     console.log(params);
     const request = await httpClient.get<SearchCompaniesDto, AxiosResponse<GetCompaniesRequest>>(
-      apiUrls.companies + `?${params}`
+      apiUrls.companies + `${params}`
     );
     console.log('search request', request);
     console.log('search request data', request.data);

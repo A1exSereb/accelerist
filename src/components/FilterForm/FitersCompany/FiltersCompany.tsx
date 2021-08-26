@@ -41,7 +41,7 @@ export const FiltersCompany = () => {
       </Row>
       <Row>
         <Field
-          name="affinities"
+          name="scope"
           label="Scope"
           placeholder="Select.."
           component={FieldSingleSelect}
@@ -77,7 +77,7 @@ export const FiltersCompany = () => {
         <Field
           name="moneySlider"
           label="Revenue"
-          initialValue={[1, 25]}
+          initialValue={[0, 35]}
           component={FieldMoneyRangeSlider}
         />
         <div></div>

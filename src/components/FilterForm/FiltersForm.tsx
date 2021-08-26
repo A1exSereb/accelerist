@@ -1,11 +1,12 @@
 import React from 'react';
-import { Form } from 'react-final-form';
+import { Field, Form } from 'react-final-form';
 import { setFilters } from 'store/ducks/companies/slice';
 import { useAppDispatch } from 'store/store';
 import styled, { css } from 'styled-components';
 import { Filters } from 'types';
 import ButtonUI from 'ui/Button';
 import RadioButtons from 'ui/RadioButtons/RadioButtons';
+import { FiltersCustomer } from './FiltersCustomer/FiltersCustomer';
 import FiltersCompany from './FitersCompany';
 
 interface FiltersFormProps {
@@ -31,9 +32,10 @@ const FiltersForm: React.FC<FiltersFormProps> = ({ onClose }: FiltersFormProps) 
           <form onSubmit={handleSubmit}>
             <Title>Filters</Title>
             <TabContainer>
-              <RadioButtons options={options} />
+              <Field name="variantForm" options={options} component={RadioButtons} />
             </TabContainer>
             <FiltersCompany />
+            <FiltersCustomer />
             <ButtonsGroup>
               <ButtonUI
                 content="Cancel"
