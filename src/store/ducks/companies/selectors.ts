@@ -8,3 +8,7 @@ export const getCompaniesLoading = (state: RootState) => state.companies.loading
 export const getSearchCompanies = (state: RootState) => state.companies.companiesSearch.items;
 export const getSearchCompaniesMeta = (state: RootState) => state.companies.companiesSearch.meta;
 export const getSearchFilters = (state: RootState) => state.companies.filters;
+export const getCompany = (state: RootState) => state.companies.company.item;
+export const getCompanyScoops = (state: RootState) => state.companies.company.scoops;
+export const getCompanyNews = (state: RootState) => state.companies.company.news;
+export const getCompanyContacts = (state: RootState) => state.companies.company.contacts;

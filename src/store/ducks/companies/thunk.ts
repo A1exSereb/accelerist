@@ -1,6 +1,14 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { Api } from 'service/api';
-import { GetCompaniesRequest, GetFavoritesCompaniesDto, SearchCompaniesDto } from 'types';
+import {
+  Company,
+  Contacts,
+  GetCompaniesRequest,
+  GetFavoritesCompaniesDto,
+  News,
+  Scoop,
+  SearchCompaniesDto,
+} from 'types';
 
 export const getFavoriteCompaniesThunk = createAsyncThunk<
   GetCompaniesRequest,
@@ -28,3 +36,39 @@ export const toggleCompanyLikeThunk = createAsyncThunk<
   const res = await Api.toggleCompanyLike(payload);
   return { res, ...payload };
 });
+
+export const getCompanyThunk = createAsyncThunk<Company, { id: string }>(
+  'companies/getCompany',
+  async (payload) => {
+    console.log('call set like');
+    const res = await Api.getCompany(payload);
+    return res;
+  }
+);
+
+export const getCompanyContactsThunk = createAsyncThunk<Contacts[], { id: string }>(
+  'companies/getCompanyContacts',
+  async (payload) => {
+    console.log('call set like');
+    const res = await Api.getCompanyContacts(payload);
+    return res;
+  }
+);
+
+export const getCompanyScoopsThunk = createAsyncThunk<Scoop[], { id: string }>(
+  'companies/getCompanyScoops',
+  async (payload) => {
+    console.log('call set like');
+    const res = await Api.getCompanyScoops(payload);
+    return res;
+  }
+);
+
+export const getCompanyNewsThunk = createAsyncThunk<News[], { id: string }>(
+  'companies/getCompanyNews',
+  async (payload) => {
+    console.log('call set like');
+    const res = await Api.getCompanyNews(payload);
+    return res;
+  }
+);

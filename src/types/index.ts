@@ -1,4 +1,10 @@
-import { AgeRanges, Gender, Income } from './search';
+import { AgeRanges, Income } from 'pages/Main/types';
+
+export enum Gender {
+  'male' = 'male',
+  'female' = 'female',
+  'both' = 'both',
+}
 
 export type User = {
   id: string;
@@ -17,7 +23,24 @@ export type User = {
   updatedAt: string | null;
   deletedAt: string | null;
 };
+export type Contacts = {
+  name: string;
+  department: string;
+  telNumber: string;
+  email: string;
+};
 
+export type Scoop = {
+  date: string;
+  csrFocus: string[];
+  description: string;
+};
+export type News = {
+  image: string;
+  title: string;
+  description: string;
+  date: string;
+};
 export type Filters = {
   sdgGoals?: string[];
   ethnicities?: string[];
@@ -57,7 +80,13 @@ export type Company = {
   revenueRange: string | null;
   employeeRange: string | null;
   twitterHandle: string | null;
-  socialMediaUrls: Array<Array<string>> | null;
+  socialMediaUrls:
+    | {
+        name: string;
+        link: string;
+        img: string;
+      }[]
+    | null;
   competitors: string | null;
   subUnitIndustries: string | null;
   primaryIndustry: Array<string>;

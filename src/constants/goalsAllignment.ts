@@ -15,7 +15,7 @@ import SDGImage14 from 'assets/images/sdg/sdg-14.svg';
 import SDGImage15 from 'assets/images/sdg/sdg-15.svg';
 import SDGImage16 from 'assets/images/sdg/sdg-16.svg';
 import SDGImage17 from 'assets/images/sdg/sdg-17.svg';
-import { SdgGoals } from 'types/sdg-goals';
+import { SdgGoals } from 'pages/Main/types';
 
 export const goalAlignmentOptions = {
   [SdgGoals.NO_POVERTY]: {

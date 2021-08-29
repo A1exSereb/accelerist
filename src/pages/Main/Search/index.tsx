@@ -15,7 +15,7 @@ import Spinner from 'ui/Spinner';
 import { Loading } from 'store/types/StoreSlice';
 import SearchItem from '../../../components/SearchItem/SearchItems';
 import { Field, Form } from 'react-final-form';
-import SupportForm from 'components/SupportForm';
+import SupportForm from 'components/Forms/SupportForm';
 import { setFilters } from 'store/ducks/companies/slice';
 import FiltersForm from 'components/FilterForm';
 

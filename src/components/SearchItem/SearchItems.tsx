@@ -7,6 +7,7 @@ import heartGrayIcon from 'assets/images/icons/heartGray.svg';
 import { ThirdButton } from 'styled/styled';
 import { useDispatch } from 'react-redux';
 import { toggleCompanyLikeThunk } from 'store/ducks/companies/thunk';
+import { Link } from 'react-router-dom';
 
 const SearchItem: React.FC<{ company: Company }> = ({ company }: { company: Company }) => {
   const dispatch = useDispatch();
@@ -22,7 +23,9 @@ const SearchItem: React.FC<{ company: Company }> = ({ company }: { company: Comp
       </LSContainer>
       <RSContainer>
         <div>
-          <CompanyName>{company.name}</CompanyName>
+          <LinkTo to={`/company/${company.id}`}>
+            <CompanyName>{company.name}</CompanyName>
+          </LinkTo>
           <CompanyAddress>{companyAddress}</CompanyAddress>
           <CompanyPhone></CompanyPhone>
         </div>
@@ -60,6 +63,10 @@ export default SearchItem;
 const ButtonWrapperCss = css`
   width: 80%;
   width: 80%;
+`;
+
+const LinkTo = styled(Link)`
+  text-decoration: none;
 `;
 
 const LikeImg = styled.img`

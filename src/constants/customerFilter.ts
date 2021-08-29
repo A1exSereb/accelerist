@@ -1,4 +1,4 @@
-import { AgeRanges, Income } from 'types/search';
+import { AgeRanges, Income } from 'pages/Main/types';
 
 export const genderOptions = [
   { value: 'male', label: 'Male' },

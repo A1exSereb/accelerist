@@ -30,11 +30,12 @@ const MainNavbar = () => {
 export default MainNavbar;
 
 const Navbar = styled.nav`
+  white-space: nowrap;
   a {
     text-decoration: none;
     font-size: 12px;
     color: #122434;
-    margin-right: 28px;
+    margin-right: 20px;
     .selected {
       border-bottom: 1px solid #122434;
     }

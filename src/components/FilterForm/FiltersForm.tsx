@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Field, Form } from 'react-final-form';
 import { setFilters } from 'store/ducks/companies/slice';
 import { useAppDispatch } from 'store/store';
@@ -20,6 +20,11 @@ const options = [
 
 const FiltersForm: React.FC<FiltersFormProps> = ({ onClose }: FiltersFormProps) => {
   const dispatch = useAppDispatch();
+  useEffect(() => {
+    return () => {
+      dispatch(setFilters({}));
+    };
+  }, [dispatch]);
   const onSubmit = (values: Filters) => {
     console.log(values);
     dispatch(setFilters(values));

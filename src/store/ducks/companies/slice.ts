@@ -1,13 +1,23 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Loading, LoadingStatus, StoreSlice } from 'store/types/StoreSlice';
-import { Company, Filters, Meta } from 'types';
+import { Company, Contacts, Filters, Meta, News, Scoop } from 'types';
 import {
+  getCompanyContactsThunk,
+  getCompanyNewsThunk,
+  getCompanyScoopsThunk,
+  getCompanyThunk,
   getFavoriteCompaniesThunk,
   getSearchedCompaniesThunk,
   toggleCompanyLikeThunk,
 } from './thunk';
 
 interface Companies {
+  company: {
+    item: Company | null;
+    scoops: Scoop[];
+    news: News[];
+    contacts: Contacts[];
+  };
   favoritesCompanies: {
     items: Array<Company>;
     meta: Meta;
@@ -22,6 +32,12 @@ interface Companies {
 }
 
 const initialState: Companies = {
+  company: {
+    item: null,
+    scoops: [],
+    news: [],
+    contacts: [],
+  },
   favoritesCompanies: {
     items: [],
     meta: {
@@ -52,8 +68,7 @@ const companiesSlice = createSlice({
   initialState,
   reducers: {
     setFilters: (state, action: PayloadAction<Filters>) => {
-      const clearedFilters: Filters = JSON.parse(JSON.stringify(action.payload));
-      state.filters = clearedFilters;
+      state.filters = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -92,6 +107,18 @@ const companiesSlice = createSlice({
       .addCase(toggleCompanyLikeThunk.rejected, (state, action) => {
         state.error = true;
         state.loading = Loading.rejected;
+      })
+      .addCase(getCompanyThunk.fulfilled, (state, action) => {
+        state.company.item = action.payload;
+      })
+      .addCase(getCompanyScoopsThunk.fulfilled, (state, action) => {
+        state.company.scoops = action.payload;
+      })
+      .addCase(getCompanyNewsThunk.fulfilled, (state, action) => {
+        state.company.news = action.payload;
+      })
+      .addCase(getCompanyContactsThunk.fulfilled, (state, action) => {
+        state.company.contacts = action.payload;
       });
   },
 });

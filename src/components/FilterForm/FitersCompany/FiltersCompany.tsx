@@ -1,7 +1,7 @@
 import { csrFocus, geoLoc, scopeOptions } from 'constants/companyFilterOptions';
 import { goalAlignmentOptions } from 'constants/goalsAllignment';
-import FieldMoneyRangeSlider from 'fields/FieldMoneySlider/FieldMoneySlider';
-import FiledMultiSelectWithCheckBoxes from 'fields/FieldMultiSelect/FieldMultiSelect';
+/* import FieldMoneyRangeSlider from 'fields/FieldMoneySlider/FieldMoneySlider';
+ */ import FiledMultiSelectWithCheckBoxes from 'fields/FieldMultiSelect/FieldMultiSelect';
 import FieldSingleSelect from 'fields/FieldSingleSelect.tsc/FieldSingleSelect';
 import React, { useMemo } from 'react';
 import { Field } from 'react-final-form';
@@ -74,12 +74,12 @@ export const FiltersCompany = () => {
         />
       </Row>
       <Row>
-        <Field
+        {/* <Field
           name="moneySlider"
           label="Revenue"
           initialValue={[0, 35]}
           component={FieldMoneyRangeSlider}
-        />
+        /> */}
         <div></div>
       </Row>
     </>

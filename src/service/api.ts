@@ -1,9 +1,13 @@
 import { AxiosResponse } from 'axios';
 import {
   AuthorizationRequest,
+  Company,
+  Contacts,
   Filters,
   GetCompaniesRequest,
   GetFavoritesCompaniesDto,
+  News,
+  Scoop,
   SearchCompaniesDto,
   SignInDto,
 } from 'types';
@@ -111,6 +115,38 @@ export const Api = {
     const url = payload.like ? apiUrls.dislike : apiUrls.like;
     const request = await httpClient.get<{ id: string }, AxiosResponse<boolean>>(
       apiUrls.companies + `/${payload.id}` + url
+    );
+
+    return request.data;
+  },
+  async getCompany(payload: { id: string }): Promise<Company> {
+    const { id } = payload;
+    const request = await httpClient.get<{ id: string }, AxiosResponse<Company>>(
+      apiUrls.companies + `/${id}`
+    );
+
+    return request.data;
+  },
+  async getCompanyContacts(payload: { id: string }): Promise<Contacts[]> {
+    const { id } = payload;
+    const request = await httpClient.get<{ id: string }, AxiosResponse<Contacts[]>>(
+      apiUrls.companies + `/${id}` + apiUrls.contacts
+    );
+
+    return request.data;
+  },
+  async getCompanyScoops(payload: { id: string }): Promise<Scoop[]> {
+    const { id } = payload;
+    const request = await httpClient.get<{ id: string }, AxiosResponse<Scoop[]>>(
+      apiUrls.companies + `/${id}` + apiUrls.scoops
+    );
+
+    return request.data;
+  },
+  async getCompanyNews(payload: { id: string }): Promise<News[]> {
+    const { id } = payload;
+    const request = await httpClient.get<{ id: string }, AxiosResponse<News[]>>(
+      apiUrls.companies + `/${id}` + apiUrls.news
     );
 
     return request.data;

@@ -8,4 +8,7 @@ export const apiUrls = {
   companies: '/companies',
   like: '/like',
   dislike: '/dislike',
+  contacts: '/contacts',
+  scoops: '/scoops',
+  news: '/news',
 };
