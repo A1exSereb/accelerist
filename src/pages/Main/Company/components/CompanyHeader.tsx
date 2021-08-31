@@ -1,48 +1,43 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { ReactSVG } from 'react-svg';
 import { toggleCompanyLikeThunk } from 'store/ducks/companies/thunk';
 import styled from 'styled-components';
 import HeartIcon from 'assets/images/icons/heartGray.svg';
 import RedHeartIcon from 'assets/images/icons/search/heart.svg';
+import NoLogo from 'assets/images/icons/no_logo.png';
 import { getCompany } from 'store/ducks/companies/selectors';
+import CompanySocialMediaLinks from './CompanySocialMediaLinks';
 
 export const CompanyHeader: React.FC = () => {
   const dispatch = useDispatch();
   const company = useSelector(getCompany);
+  const [like, setLike] = useState<boolean>(company ? company.like : false);
   return (
     <Wrapper>
-      <CompanyLogo src={company?.logo} />
+      <CompanyLogo src={company?.logo ? company.logo : NoLogo} />
       <Info>
-        <div style={{ display: 'flex' }}>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
           <Name>{company?.name}</Name>
           <LikeIcon
             onClick={() => {
               company && dispatch(toggleCompanyLikeThunk({ id: company.id, like: company.like }));
+              setLike(!like);
             }}
-            src={company?.like ? HeartIcon : RedHeartIcon}
+            src={like ? HeartIcon : RedHeartIcon}
           />
         </div>
-        {company?.crsFocus ? (
-          <CsrFocus>{company.crsFocus.slice(2).join(', ')}</CsrFocus>
-        ) : (
-          <CsrFocus>No Information</CsrFocus>
-        )}
         <CsrFocus>
-          {company?.crsFocus ? company.crsFocus.slice(2).join(', ') : <Empty>No Information</Empty>}
+          {company?.industries ? company.industries.slice(2).join(', ') : 'No Information'}
         </CsrFocus>
         <Links>
           {company?.socialMediaUrls ? (
-            company.socialMediaUrls.map((link) => (
-              <a href={link.link} key={link.name}>
-                <img src={link.img} />
-              </a>
-            ))
+            <CompanySocialMediaLinks urls={company.socialMediaUrls} />
           ) : (
             <Empty>No Information</Empty>
           )}
         </Links>
       </Info>
+      <BlockButton>Block</BlockButton>
     </Wrapper>
   );
 };
@@ -68,7 +63,7 @@ const Info = styled.div`
   display: flex;
   height: 100%;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: space-between;
   margin-left: 20px;
 `;
 
@@ -79,11 +74,11 @@ const Name = styled.h3`
   font-weight: 500;
 `;
 
-const LikeIcon = styled(ReactSVG)`
+const LikeIcon = styled.img`
   margin-left: 10px;
 `;
 
-const CsrFocus = styled.p`
+const CsrFocus = styled.span`
   margin: 0;
   color: #737373;
   font-size: 12px;
@@ -94,6 +89,19 @@ const Links = styled.div`
   display: flex;
   justify-content: space-between;
   align-content: flex-end;
+`;
+
+const BlockButton = styled.button`
+  background: #ffffff;
+  border: 1px solid #e8e8e8;
+  box-sizing: border-box;
+  border-radius: 6px;
+  display: flex;
+  text-aligin: center;
+  color: #f05658;
+  cursor: pointer;
+  padding: 9px 27px;
+  margin-left: auto;
 `;
 
 const Empty = styled(CsrFocus)``;

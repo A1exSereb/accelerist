@@ -41,6 +41,11 @@ export type News = {
   description: string;
   date: string;
 };
+
+export type SocialMedia = {
+  type: string;
+  url: string;
+};
 export type Filters = {
   sdgGoals?: string[];
   ethnicities?: string[];
@@ -64,7 +69,12 @@ export type Company = {
   zoomInfoId: number | null;
   name: string;
   logo: string | undefined;
-  ticker: string | null;
+  ticker:
+    | {
+        type: string;
+        exchange: string;
+      }[]
+    | undefined;
   parentCompany: string | null;
   phone: number;
   fax: string | null;
@@ -75,18 +85,12 @@ export type Company = {
   zipCode: string;
   country: string;
   continent: string | null;
-  productsBrandDescription: string | null;
-  descriptionList: string | null;
+  productsBrandDescription: string | undefined;
+  descriptionList: string | undefined;
   revenueRange: string | null;
   employeeRange: string | null;
   twitterHandle: string | null;
-  socialMediaUrls:
-    | {
-        name: string;
-        link: string;
-        img: string;
-      }[]
-    | null;
+  socialMediaUrls: SocialMedia[] | null;
   competitors: string | null;
   subUnitIndustries: string | null;
   primaryIndustry: Array<string>;

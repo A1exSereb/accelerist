@@ -1,0 +1,5 @@
+export const SOCIAL_MEDIA = {
+  LINKED_IN: 'LINKED_IN',
+  FACEBOOK: 'FACEBOOK',
+  TWITTER: 'TWITTER',
+};
