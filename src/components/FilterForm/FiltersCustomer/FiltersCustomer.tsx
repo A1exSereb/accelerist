@@ -5,7 +5,7 @@ import {
   incomeOptions,
   relationsOptions,
 } from 'constants/customerFilter';
-import FiledMultiSelectWithCheckBoxes from 'fields/FieldMultiSelect/FieldMultiSelect';
+import FiledMultiSelectWithCheckBoxes from 'components/fields/FieldMultiSelect/FieldMultiSelect';
 import React from 'react';
 import { Field } from 'react-final-form';
 import styled from 'styled-components';

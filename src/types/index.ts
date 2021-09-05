@@ -1,4 +1,4 @@
-import { AgeRanges, Income } from 'pages/Main/types';
+import { AgeRanges, Income, SdgGoals } from 'pages/Main/types';
 
 export enum Gender {
   'male' = 'male',
@@ -78,7 +78,7 @@ export type Company = {
   parentCompany: string | null;
   phone: number;
   fax: string | null;
-  website: string | null;
+  website: string | undefined;
   city: string;
   street: string;
   state: string | null;
@@ -104,7 +104,7 @@ export type Company = {
   parentId: string | null;
   parentName: string | null;
   type: string | null;
-  sdgGoals: string | null;
+  sdgGoals: SdgGoals[] | null;
   genders: Array<string> | null;
   income: string | null;
   age: string | null;
@@ -114,7 +114,7 @@ export type Company = {
   affiliation: any;
   brands: any;
   interests: string[];
-  typesOfInvestment: any;
+  typesOfInvestment: string[];
   errorLoadZoomInfo: any;
   charitablePartners: Array<any>;
   statusZoomInfo: string | null;

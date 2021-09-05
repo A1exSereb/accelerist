@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import { FieldRenderProps } from 'react-final-form';
 import { ISelectProps } from 'react-multi-select-component/dist/lib/interfaces';
-import FieldSection from 'fields/FieldSection/FieldSection';
+import FieldSection from 'components/fields/FieldSection/FieldSection';
 import MultiSelectWithCheckBoxes from 'ui/MultiSelectWithCheckbox/MultiSelectWithCheckbox';
 import { BaseMultiSelectProps } from 'ui/types';
 

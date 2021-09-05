@@ -1,5 +1,5 @@
 import Modal from 'components/Modal';
-import FieldSingleSelect from 'fields/FieldSingleSelect.tsc/FieldSingleSelect';
+import FieldSingleSelect from 'components/fields/FieldSingleSelect.tsc/FieldSingleSelect';
 import { SupportOptionsEnum } from 'pages/Main/types';
 import React from 'react';
 import { Field, Form } from 'react-final-form';
@@ -11,7 +11,7 @@ interface SupportFormProps {
   onClose: Function;
 }
 
-export const SupportForm: React.FC<SupportFormProps> = ({ onClose }: SupportFormProps) => {
+export const SupportModal: React.FC<SupportFormProps> = ({ onClose }: SupportFormProps) => {
   const supportOptions = [
     { label: 'Profile Update Request', value: 'Profile Update Request' },
     { label: 'System Bug', value: 'System Bug' },

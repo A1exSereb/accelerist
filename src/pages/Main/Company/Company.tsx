@@ -67,10 +67,11 @@ const Wrapper = styled.div`
 `;
 
 const Content = styled.div`
-  width: 710px;
+  width: 729px;
   height: 100%;
   border-right: 1px solid #ebebeb;
   padding: 32px 40px;
+  box-sizing: border-box;
 `;
 
 const Container = styled.div`

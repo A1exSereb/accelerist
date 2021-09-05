@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Company } from 'types';
 import CompanyContacts from './CompanyContacts';
+import CompanySocialImpact from './CompanySocialImpact';
 import CompanyTabs from './CompanyTabs';
 
 interface CompanyDescriptionProps {
@@ -51,6 +52,7 @@ const CompanyDescription: React.FC<CompanyDescriptionProps> = ({
         )}
       </div>
       <CompanyContacts company={company} />
+      <CompanySocialImpact company={company} />
     </>
   );
 };

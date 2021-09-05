@@ -8,6 +8,9 @@ interface CompanyTabsProps {
 
 const CompanyTabs: React.FC<CompanyTabsProps> = ({ company }: CompanyTabsProps) => {
   const [activeTab, setActiveTab] = useState(0);
+  const checkActive = (num: number) => {
+    return num === activeTab ? true : false;
+  };
   const similarCompanies = company.similarCompanies ? (
     company.similarCompanies.map((company) => <p key={company}>{company}</p>)
   ) : (
@@ -26,22 +29,13 @@ const CompanyTabs: React.FC<CompanyTabsProps> = ({ company }: CompanyTabsProps) 
   return (
     <>
       <CompaniesTitleContainer>
-        <CompaniesSubtitle
-          onClick={() => setActiveTab(0)}
-          className={activeTab === 0 ? 'active' : 'unactive'}
-        >
+        <CompaniesSubtitle onClick={() => setActiveTab(0)} active={checkActive(0)}>
           Similar Companies
         </CompaniesSubtitle>
-        <CompaniesSubtitle
-          onClick={() => setActiveTab(1)}
-          className={activeTab === 1 ? 'active' : 'unactive'}
-        >
+        <CompaniesSubtitle onClick={() => setActiveTab(1)} active={checkActive(1)}>
           Parent Company
         </CompaniesSubtitle>
-        <CompaniesSubtitle
-          onClick={() => setActiveTab(2)}
-          className={activeTab === 2 ? 'active' : 'unactive'}
-        >
+        <CompaniesSubtitle onClick={() => setActiveTab(2)} active={checkActive(2)}>
           Subsidiaries
         </CompaniesSubtitle>
       </CompaniesTitleContainer>
@@ -70,10 +64,11 @@ const CompaniesTitleContainer = styled.div`
   display: flex;
 `;
 
-const CompaniesSubtitle = styled(Subtitle)`
+const CompaniesSubtitle = styled(Subtitle)<{ active: boolean }>`
   margin-right: 32px;
   cursor: pointer;
   &.active {
     color: #2baee0;
   }
+  color: ${(props) => (props.active ? '#2baee0' : '#122434')};
 `;

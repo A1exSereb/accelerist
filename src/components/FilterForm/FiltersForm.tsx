@@ -1,13 +1,17 @@
 import React, { useEffect } from 'react';
 import { Field, Form } from 'react-final-form';
 import { setFilters } from 'store/ducks/companies/slice';
-import { useAppDispatch } from 'store/store';
 import styled, { css } from 'styled-components';
 import { Filters } from 'types';
 import ButtonUI from 'ui/Button';
 import RadioButtons from 'ui/RadioButtons/RadioButtons';
 import { FiltersCustomer } from './FiltersCustomer/FiltersCustomer';
 import FiltersCompany from './FitersCompany';
+import queryString from 'query-string';
+import { getSearchedCompaniesThunk } from 'store/ducks/companies/thunk';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router';
+import { getSearchFilters } from 'store/ducks/companies/selectors';
 
 interface FiltersFormProps {
   onClose: Function;
@@ -19,20 +23,29 @@ const options = [
 ];
 
 const FiltersForm: React.FC<FiltersFormProps> = ({ onClose }: FiltersFormProps) => {
-  const dispatch = useAppDispatch();
+  const dispatch = useDispatch();
+  const { location, push } = useHistory();
+  const searchFilters = useSelector(getSearchFilters);
+
   useEffect(() => {
     return () => {
       dispatch(setFilters({}));
     };
   }, [dispatch]);
-  const onSubmit = (values: Filters) => {
-    console.log(values);
-    dispatch(setFilters(values));
+
+  const onSubmit = (values?: Filters) => {
+    const filters = window.btoa(JSON.stringify(values));
+
+    push(`${location.pathname}?${queryString.stringify({ filters: filters })}`);
+
+    return dispatch(getSearchedCompaniesThunk({ page: 1, limit: 12, ...values }));
   };
+
   return (
     <Container>
       <Form
         onSubmit={onSubmit}
+        initialValues={searchFilters}
         render={({ handleSubmit }) => (
           <form onSubmit={handleSubmit}>
             <Title>Filters</Title>

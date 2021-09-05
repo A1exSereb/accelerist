@@ -1,8 +1,8 @@
 import { csrFocus, geoLoc, scopeOptions } from 'constants/companyFilterOptions';
 import { goalAlignmentOptions } from 'constants/goalsAllignment';
 /* import FieldMoneyRangeSlider from 'fields/FieldMoneySlider/FieldMoneySlider';
- */ import FiledMultiSelectWithCheckBoxes from 'fields/FieldMultiSelect/FieldMultiSelect';
-import FieldSingleSelect from 'fields/FieldSingleSelect.tsc/FieldSingleSelect';
+ */ import FiledMultiSelectWithCheckBoxes from 'components/fields/FieldMultiSelect/FieldMultiSelect';
+import FieldSingleSelect from 'components/fields/FieldSingleSelect.tsc/FieldSingleSelect';
 import React, { useMemo } from 'react';
 import { Field } from 'react-final-form';
 import styled, { css } from 'styled-components';

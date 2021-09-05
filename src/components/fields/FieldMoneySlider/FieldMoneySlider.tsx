@@ -3,7 +3,7 @@ import { css } from 'styled-components';
 import { FieldRenderProps } from 'react-final-form';
 
 import { IProps } from 'react-range/lib/types';
-import FieldSection from 'fields/FieldSection/FieldSection';
+import FieldSection from 'components/fields/FieldSection/FieldSection';
 import MoneyRangeSlider from 'ui/MoneyRangeSlider/MoneyRangeSlider';
 
 type Props = Partial<IProps> & FieldRenderProps<number[]>;

@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { HTMLAttributes, InputHTMLAttributes } from 'react';
+import { ButtonHTMLAttributes, HTMLAttributes, InputHTMLAttributes } from 'react';
 import { FlattenSimpleInterpolation } from 'styled-components';
 import { Option as MultiSelectOption } from 'react-multi-select-component/dist/lib/interfaces';
 import { FieldInputProps, FieldMetaState } from 'react-final-form';
@@ -60,9 +60,8 @@ export interface SelectorProps extends InputHTMLAttributes<HTMLSelectElement> {
   inputCSS?: FlattenSimpleInterpolation;
 }
 
-export interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   content?: string | React.ReactNode;
-  type?: 'button' | 'reset' | 'submit' | undefined;
   disabled?: boolean;
   rightChild?: React.ReactNode;
   leftChild?: React.ReactNode;

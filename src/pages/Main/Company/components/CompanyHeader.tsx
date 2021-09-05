@@ -7,11 +7,16 @@ import RedHeartIcon from 'assets/images/icons/search/heart.svg';
 import NoLogo from 'assets/images/icons/no_logo.png';
 import { getCompany } from 'store/ducks/companies/selectors';
 import CompanySocialMediaLinks from './CompanySocialMediaLinks';
+import { CompanyBlockModal } from 'components/Modal/CompanyBlockModal/CompanyBlockModal';
 
 export const CompanyHeader: React.FC = () => {
   const dispatch = useDispatch();
   const company = useSelector(getCompany);
+  const [showBlockModal, setShowBlockModal] = useState(false);
   const [like, setLike] = useState<boolean>(company ? company.like : false);
+  const toggleModal = () => {
+    setShowBlockModal(!showBlockModal);
+  };
   return (
     <Wrapper>
       <CompanyLogo src={company?.logo ? company.logo : NoLogo} />
@@ -37,7 +42,10 @@ export const CompanyHeader: React.FC = () => {
           )}
         </Links>
       </Info>
-      <BlockButton>Block</BlockButton>
+      <BlockButton onClick={() => toggleModal()}>Block</BlockButton>
+      {showBlockModal && company && (
+        <CompanyBlockModal id={company.id} companyName={company.name} onClose={toggleModal} />
+      )}
     </Wrapper>
   );
 };
