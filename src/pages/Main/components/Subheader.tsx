@@ -16,9 +16,15 @@ const MainSubheader: React.FC<{
 }) => {
   return (
     <Subheader>
+<<<<<<< HEAD
       {rightChildren && <RightChildrenContainer>{rightChildren}</RightChildrenContainer>}
       <Subtitle>{label}</Subtitle>
       {leftChildren && <LeftChildrenContainer>{leftChildren}</LeftChildrenContainer>}
+=======
+      {leftChildren && <LeftChildrenContainer>{leftChildren}</LeftChildrenContainer>}
+      <Subtitle>{label}</Subtitle>
+      {rightChildren && <RightChildrenContainer>{rightChildren}</RightChildrenContainer>}
+>>>>>>> feature/company
     </Subheader>
   );
 };
@@ -29,7 +35,11 @@ const Subheader = styled.div`
   height: 96px;
   width: 100%;
   display: flex;
+<<<<<<< HEAD
   padding: 24px 24px;
+=======
+  padding: 42px 24px;
+>>>>>>> feature/company
   justify-content: flex-start;
   font-weight: 500;
   align-items: center;

@@ -1,10 +1,15 @@
 import React, { ReactNodeArray } from 'react';
 import styled from 'styled-components';
 import { v4 as uuidv4 } from 'uuid';
+interface TabsProps {
+  childs: ReactNodeArray;
+  label?: string;
+}
 
-const Tabs: React.FC<{ childs: ReactNodeArray }> = ({ childs }: { childs: ReactNodeArray }) => {
+const Tabs: React.FC<TabsProps> = ({ childs, label }: TabsProps) => {
   return (
     <TabsContainer>
+      {label && <LabelContainer>{label}</LabelContainer>}
       {childs.map((child) => (
         <Tab key={uuidv4()}>{child}</Tab>
       ))}
@@ -13,6 +18,12 @@ const Tabs: React.FC<{ childs: ReactNodeArray }> = ({ childs }: { childs: ReactN
 };
 
 export default Tabs;
+
+const LabelContainer = styled.label`
+  font-size: 12px;
+  color: #737373;
+  align-self: flex-start;
+`;
 
 const TabsContainer = styled.div`
   text-align: 'center';

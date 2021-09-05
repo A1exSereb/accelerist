@@ -9,6 +9,7 @@ const TextInput: React.FC<FieldRenderProps<string, HTMLElement>> = ({
   leftChild,
   rightChild,
   wrapperCSS,
+  placeholder,
   containerCSS,
   inputCSS,
   meta,
@@ -22,6 +23,7 @@ const TextInput: React.FC<FieldRenderProps<string, HTMLElement>> = ({
         <div>
           {leftChild && <div>{leftChild}</div>}
           <Input
+            placeholder={placeholder}
             $error={meta.touched && meta.error ? true : false}
             {...input}
             {...rest}
@@ -45,8 +47,7 @@ const ErrorContainer = styled.div`
   font-size: 12px;
   color: #691616;
 `;
-/* const Error = styled.div``;
- */ const Wrapper = styled('div')<{ $CSS?: FlattenSimpleInterpolation }>`
+const Wrapper = styled('div')<{ $CSS?: FlattenSimpleInterpolation }>`
   width: 100%;
   ${(props) => (props.$CSS ? { ...props.$CSS } : {})}
 `;

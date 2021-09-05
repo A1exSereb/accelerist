@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from 'react';
 import styled, { css } from 'styled-components';
 import { ThirdButton } from 'styled/styled';
@@ -7,10 +8,18 @@ import DashboardHeader from './DashboardHeader';
 
 const ProspectingSessions: React.FC = () => {
   const filtersToMap = ['1filer', 'secFilter', 'And another one'];
+=======
+import ProspectsItem from 'components/ProstectsItem';
+import React from 'react';
+import DashboardHeader from './DashboardHeader';
+
+const ProspectingSessions: React.FC = () => {
+>>>>>>> feature/company
   return (
     <>
       <DashboardHeader label="Prospecting Sessions" />
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+<<<<<<< HEAD
         <PSContainer>
           <PSTitle>Race for the Cure</PSTitle>
           <Separator />
@@ -89,12 +98,17 @@ const ProspectingSessions: React.FC = () => {
             </DateContainer>
           </Footer>
         </PSContainer>
+=======
+        <ProspectsItem />
+        <ProspectsItem />
+>>>>>>> feature/company
       </div>
     </>
   );
 };
 
 export default ProspectingSessions;
+<<<<<<< HEAD
 
 const PSContainer = styled.div`
   width: 49%;
@@ -199,3 +213,5 @@ const GrayText = styled.p`
   font-size: 12px;
   font-weight: 400;
 `;
+=======
+>>>>>>> feature/company

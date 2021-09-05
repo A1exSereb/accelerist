@@ -9,4 +9,7 @@ const Spinner: React.FC = () => {
 export default Spinner;
 const SpinnerContainer = styled.img`
   animation: ${rotate} 2s linear infinite;
+  margin: 0 auto;
+  display: block;
+  align-self: center;
 `;

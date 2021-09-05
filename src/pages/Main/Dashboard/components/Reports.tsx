@@ -70,6 +70,10 @@ const Container = styled.div`
   background-color: #fff;
   border-radius: 6px;
   padding: 24px;
+<<<<<<< HEAD
+=======
+  overflow: hidden;
+>>>>>>> feature/company
   box-sizing: border-box;
 `;
 

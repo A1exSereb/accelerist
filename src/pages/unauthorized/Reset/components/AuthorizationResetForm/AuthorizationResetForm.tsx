@@ -51,7 +51,7 @@ const AuthorizationResetForm: React.FC<AuthorizationResetFormProps> = ({
             containerCSS={ButtonContainer}
             disabled={pristine}
             wrapperCSS={ButtonWrapper}
-            content={authLoading === Loading.pending ? Spinner : buttonPlaceholder}
+            content={authLoading === Loading.pending ? <Spinner /> : buttonPlaceholder}
             type="submit"
           />
         </form>
