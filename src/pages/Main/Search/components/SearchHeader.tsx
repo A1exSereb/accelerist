@@ -8,6 +8,7 @@ import saveListIcon from 'assets/images/icons/search/folder-plus.svg';
 import uploadIcon from 'assets/images/icons/search/upload.svg';
 import IconSignature from 'ui/IconSignature/IconSignature';
 import SearchPaginationSwitcher from './SearchPaginationSwitcher';
+import { getSearchedCompaniesThunk } from 'store/ducks/companies/thunk';
 
 interface SearchHeaderProps {
   limit: number;
@@ -32,7 +33,11 @@ const SearchHeader: React.FC<SearchHeaderProps> = ({
             label="Accelerist Support"
           />
         </SignatureContainer>
-        <SearchPaginationSwitcher limit={limit} meta={searchMeta} />
+        <SearchPaginationSwitcher
+          asyncAction={getSearchedCompaniesThunk}
+          limit={limit}
+          meta={searchMeta}
+        />
       </Container>
     </HeaderContainer>
   );

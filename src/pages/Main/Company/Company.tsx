@@ -60,6 +60,7 @@ export default Company;
 const BackArrow = styled(ReactSVG)`
   transform: rotate(90deg);
   margin-right: 8px;
+  cursor: pointer;
 `;
 
 const Wrapper = styled.div`

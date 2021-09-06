@@ -7,10 +7,11 @@ import heartGrayIcon from 'assets/images/icons/heartGray.svg';
 import { ThirdButton } from 'styled/styled';
 import { useDispatch } from 'react-redux';
 import { toggleCompanyLikeThunk } from 'store/ducks/companies/thunk';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 const SearchItem: React.FC<{ company: Company }> = ({ company }: { company: Company }) => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const companyAddress = `${company.city}, ${company.state} ${company.zipCode}`;
   return (
     <Container>
@@ -51,7 +52,12 @@ const SearchItem: React.FC<{ company: Company }> = ({ company }: { company: Comp
             content={<LikeImg src={company.like ? heartIcon : heartGrayIcon} />}
             buttonCSS={HeartButtonCss}
           />
-          <ButtonUI content="Profile" buttonCSS={ThirdButton} wrapperCSS={ButtonWrapperCss} />
+          <ButtonUI
+            content="Profile"
+            onClick={() => history.push(`/company/${company.id}`)}
+            buttonCSS={ThirdButton}
+            wrapperCSS={ButtonWrapperCss}
+          />
         </BottomContainer>
       </RSContainer>
     </Container>

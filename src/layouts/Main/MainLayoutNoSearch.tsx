@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-=======
 import UserProfile from 'components/UserProfile';
->>>>>>> feature/company
 import MainNavbar from 'pages/Main/components/Navbar';
 import React, { ReactNode } from 'react';
 import styled from 'styled-components';
@@ -16,10 +13,7 @@ const MainLayoutNoSearch: React.FC<{ children: ReactNode }> = ({
     <Container>
       <Header>
         <MainNavbar />
-<<<<<<< HEAD
-=======
         <UserProfile />
->>>>>>> feature/company
       </Header>
       {children}
     </Container>

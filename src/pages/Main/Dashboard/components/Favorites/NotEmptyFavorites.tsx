@@ -5,6 +5,7 @@ import Modal from 'components/Modal';
 import FavoritesModalHeader from './components/FavoritesModalHeader';
 import FavoritesModalContent from './components/FavoritesModalContent';
 import { Company, Meta } from 'types';
+import { useHistory } from 'react-router';
 
 interface NotEmptyFavoritesProps {
   favoritesMeta: Meta;
@@ -16,13 +17,14 @@ const NotEmptyFavorites: React.FC<NotEmptyFavoritesProps> = ({
   staticItems,
 }: NotEmptyFavoritesProps) => {
   const [showModal, setShowModal] = useState(false);
+  const history = useHistory();
 
   const toggleModal = () => {
     setShowModal(!showModal);
   };
   const dashboardHeaderProps = {
     label: 'Favorites',
-    onClick: toggleModal,
+    onClick: () => history.push('/favorites'),
     seeMore: favoritesMeta.totalItems > 6 ? true : false,
   };
   return (

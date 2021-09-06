@@ -3,14 +3,15 @@ import styled from 'styled-components';
 import ArrowSVG from 'assets/images/icons/pagArrow.svg';
 import { Meta } from 'types';
 import { useDispatch } from 'react-redux';
-import { getSearchedCompaniesThunk } from 'store/ducks/companies/thunk';
 
-const SearchPaginationSwitcher: React.FC<{ limit: number; meta: Meta }> = ({
+const SearchPaginationSwitcher: React.FC<{ limit: number; meta: Meta; asyncAction: any }> = ({
   limit,
   meta,
+  asyncAction,
 }: {
   limit: number;
   meta: Meta;
+  asyncAction: any;
 }) => {
   const dispatch = useDispatch();
   const currentRange = () => {
@@ -24,7 +25,7 @@ const SearchPaginationSwitcher: React.FC<{ limit: number; meta: Meta }> = ({
       case 'nextPage':
         Number(meta.currentPage) !== meta.totalPages &&
           dispatch(
-            getSearchedCompaniesThunk({
+            asyncAction({
               page: Number(meta.currentPage) + 1,
               limit: limit,
             })
@@ -33,7 +34,7 @@ const SearchPaginationSwitcher: React.FC<{ limit: number; meta: Meta }> = ({
       case 'prevPage':
         Number(meta.currentPage) !== 1 &&
           dispatch(
-            getSearchedCompaniesThunk({
+            asyncAction({
               page: Number(meta.currentPage) - 1,
               limit: limit,
             })

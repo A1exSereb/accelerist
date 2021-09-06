@@ -4,26 +4,18 @@ import MainLayout from 'layouts/Main/MainLayout';
 import Dashboard from 'pages/Main/Dashboard';
 import MainLayoutNoSearch from 'layouts/Main/MainLayoutNoSearch';
 import Search from 'pages/Main/Search';
-<<<<<<< HEAD
-=======
 import Company from 'pages/Main/Company/Company';
->>>>>>> feature/company
+import Favorites from 'pages/Main/Favorites';
 
 const MainRouter: React.FC = () => {
   return (
     <Switch>
-<<<<<<< HEAD
-      <Route path={['/dashboard']}>
-        <MainLayout>
-          <Switch>
-            <Route path="/dashboard" component={Dashboard} />
-=======
-      <Route path={['/dashboard', '/company/:companyId']}>
+      <Route path={['/dashboard', '/company/:companyId', '/favorites']}>
         <MainLayout>
           <Switch>
             <Route path="/dashboard" component={Dashboard} />
             <Route path="/company/:companyId" component={Company} />
->>>>>>> feature/company
+            <Route path="/favorites" component={Favorites} />
           </Switch>
         </MainLayout>
       </Route>

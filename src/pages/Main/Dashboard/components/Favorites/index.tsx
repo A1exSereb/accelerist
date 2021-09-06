@@ -3,14 +3,13 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCompaniesFavorites, getCompaniesFavoritesMeta } from 'store/ducks/companies/selectors';
 import { getFavoriteCompaniesThunk } from 'store/ducks/companies/thunk';
-import { Company } from 'types';
 import EmptyFavorites from './EmptyFavorites';
 import NotEmptyFavorites from './NotEmptyFavorites';
 
-const Favorites: React.FC = () => {
+const DashboardFavorites: React.FC = () => {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getFavoriteCompaniesThunk({ page: 1, limit: 6 }));
+    dispatch(getFavoriteCompaniesThunk({ page: 1, limit: 12 }));
   }, [dispatch]);
 
   const favoritesMeta = useSelector(getCompaniesFavoritesMeta);
@@ -23,4 +22,4 @@ const Favorites: React.FC = () => {
   );
 };
 
-export default Favorites;
+export default DashboardFavorites;

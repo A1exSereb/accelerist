@@ -4,26 +4,17 @@ import styled from 'styled-components';
 interface DashboardHeaderProps {
   label: string;
   seeMore?: boolean;
-<<<<<<< HEAD
-=======
-  onClick?: Function;
->>>>>>> feature/company
+  onClick?: Function | void;
 }
 
 const DashboardHeader: React.FC<DashboardHeaderProps> = ({
   label,
   seeMore = true,
-<<<<<<< HEAD
-=======
   onClick,
->>>>>>> feature/company
 }: DashboardHeaderProps) => {
   return (
     <HeaderContainer>
       <HeaderTitle>{label}</HeaderTitle>
-<<<<<<< HEAD
-      {seeMore && <HeaderText>see more</HeaderText>}
-=======
       {seeMore && (
         <HeaderText
           onClick={() => {
@@ -33,7 +24,6 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
           see more
         </HeaderText>
       )}
->>>>>>> feature/company
     </HeaderContainer>
   );
 };

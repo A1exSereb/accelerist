@@ -20,14 +20,14 @@ import { setFilters } from 'store/ducks/companies/slice';
 import FiltersForm from 'components/FilterForm';
 import SupportModal from 'components/Modal/SupportModal';
 import queryString from 'query-string';
-import { Filters } from 'types';
+import { Company, Filters } from 'types';
 
 const Search: React.FC = () => {
   const dispatch = useDispatch();
   const [showSupportModal, setShowSupportModal] = useState(false);
   const [showFilters, setShowFilters] = useState(false);
   const companiesLoading = useSelector(getCompaniesLoading);
-  const companiesSearch = useSelector(getSearchCompanies);
+  const companiesSearch: Company[] = useSelector(getSearchCompanies);
   const limit = 12;
   const setInitialState = () => {
     const filtersString = queryString.parse(location.search)?.filters;

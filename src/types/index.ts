@@ -152,7 +152,7 @@ export type SearchCompaniesDto = {
   limit: number;
 };
 
-export type Company = {
+export type Company2 = {
   id: number;
   zoomInfoId: number | null;
   name: string;

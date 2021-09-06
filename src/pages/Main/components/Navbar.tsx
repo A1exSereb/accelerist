@@ -30,19 +30,12 @@ const MainNavbar = () => {
 export default MainNavbar;
 
 const Navbar = styled.nav`
-<<<<<<< HEAD
-=======
   white-space: nowrap;
->>>>>>> feature/company
   a {
     text-decoration: none;
     font-size: 12px;
     color: #122434;
-<<<<<<< HEAD
-    margin-right: 28px;
-=======
     margin-right: 20px;
->>>>>>> feature/company
     .selected {
       border-bottom: 1px solid #122434;
     }
