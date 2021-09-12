@@ -1,26 +1,32 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import { ThirdButton } from 'styled/styled';
+import { Filters } from 'types';
 import ButtonUI from 'ui/Button';
+import { v4 as uuidv4 } from 'uuid';
 
 interface FiltersListProps {
-  filters: string[];
+  filters: Filters;
 }
+
+type K = keyof Filters;
 
 export const FiltersList: React.FC<FiltersListProps> = ({ filters }: FiltersListProps) => {
   return (
     <>
       <FiltersText>Filters</FiltersText>
       <FiltersContainer>
-        {filters.map((filter) => (
-          <ButtonUI
-            buttonCSS={ThirdButton}
-            wrapperCSS={FilerBtnWrapper}
-            disabled={false}
-            key={filter}
-            content={filter}
-          />
-        ))}
+        {Object.values(filters)
+          .slice(0, 4)
+          .map((key) => (
+            <ButtonUI
+              buttonCSS={ThirdButton}
+              wrapperCSS={FilerBtnWrapper}
+              disabled={false}
+              key={uuidv4()}
+              content={key}
+            />
+          ))}
       </FiltersContainer>
     </>
   );

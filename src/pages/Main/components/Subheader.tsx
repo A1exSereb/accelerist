@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const MainSubheader: React.FC<{
   rightChildren?: ReactNode;
   leftChildren?: ReactNode;
-  label: string;
+  label?: string;
 }> = ({
   rightChildren,
   leftChildren,
@@ -12,13 +12,13 @@ const MainSubheader: React.FC<{
 }: {
   rightChildren?: ReactNode;
   leftChildren?: ReactNode;
-  label: string;
+  label?: string;
 }) => {
   return (
     <Subheader>
       {leftChildren && <LeftChildrenContainer>{leftChildren}</LeftChildrenContainer>}
-      <Subtitle>{label}</Subtitle>
-      {rightChildren && <RightChildrenContainer>{rightChildren}</RightChildrenContainer>}
+      {label && <Subtitle>{label}</Subtitle>}
+      {rightChildren && <>{rightChildren}</>}
     </Subheader>
   );
 };

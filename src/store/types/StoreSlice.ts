@@ -2,6 +2,7 @@
 export enum StoreSlice {
   Authorization = 'authorization',
   Companies = 'companies',
+  Prospects = 'prospects',
 }
 
 export enum Loading {

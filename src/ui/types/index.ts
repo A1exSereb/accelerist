@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { ButtonHTMLAttributes, HTMLAttributes, InputHTMLAttributes } from 'react';
-import { FlattenSimpleInterpolation } from 'styled-components';
+import { CSSProp, FlattenSimpleInterpolation } from 'styled-components';
 import { Option as MultiSelectOption } from 'react-multi-select-component/dist/lib/interfaces';
 import { FieldInputProps, FieldMetaState } from 'react-final-form';
 
@@ -14,7 +14,7 @@ export interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
 
   wrapperCSS?: FlattenSimpleInterpolation;
   containerCSS?: FlattenSimpleInterpolation;
-  inputCSS?: FlattenSimpleInterpolation;
+  inputCSS?: CSSProp;
 }
 
 export interface TextAreaProps extends InputHTMLAttributes<HTMLTextAreaElement> {

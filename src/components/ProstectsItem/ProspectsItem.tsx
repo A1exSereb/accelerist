@@ -2,18 +2,31 @@ import React from 'react';
 import styled from 'styled-components';
 import FiltersList from 'components/FilterList';
 import Avatar from 'assets/images/icons/ava.svg';
+import { Prospect } from 'types';
+import dateformat from 'dateformat';
+import { Link } from 'react-router-dom';
 
-export const ProspectsItem: React.FC = () => {
-  const filtersToMap = ['1filer', 'secFilter', 'And another one'];
+export const ProspectsItem: React.FC<{ prospect: Prospect }> = ({
+  prospect,
+}: {
+  prospect: Prospect;
+}) => {
+  const getAuthorName = () => {
+    if (prospect.lastAuthor.firstName && prospect.lastAuthor.lastName)
+      return `${prospect.lastAuthor.firstName} ${prospect.lastAuthor.lastName}`;
+    return 'No Name';
+  };
   return (
     <PSContainer>
-      <PSTitle>Race for the Cure</PSTitle>
+      <PSTitle to={`/prospects/${prospect.id}`}>
+        {prospect.name ? prospect.name : 'No Name'}
+      </PSTitle>
       <Separator />
-      <FiltersList filters={filtersToMap} />
+      <FiltersList filters={prospect.filters} />
       <BlockWrapper>
         <Block>
           <BlockText>№ of Prospects Available</BlockText>
-          <BlockCount>235</BlockCount>
+          <BlockCount>{prospect.prospectsAvailable}</BlockCount>
         </Block>
         <Block>
           <BlockText>№ of Contacts Pursued</BlockText>
@@ -24,13 +37,15 @@ export const ProspectsItem: React.FC = () => {
         <div style={{ display: 'flex' }}>
           <img src={Avatar} style={{ marginRight: 5, borderRadius: 25 }} />
           <NameContainer>
-            <BlackText>Cowboy Bibop</BlackText>
-            <GrayText>Owner</GrayText>
+            <BlackText>{getAuthorName()}</BlackText>
+            <GrayText>
+              {prospect.lastAuthor.role[0].toUpperCase() + prospect.lastAuthor.role.slice(1)}
+            </GrayText>
           </NameContainer>
         </div>
         <DateContainer>
           <GrayText>Last Activity</GrayText>
-          <BlackText>1 Jul 2020</BlackText>
+          <BlackText>{dateformat(prospect.lastAuthor.loggedInAt, 'd mmm yyyy')}</BlackText>
         </DateContainer>
       </Footer>
     </PSContainer>
@@ -43,12 +58,15 @@ const PSContainer = styled.div`
   border-radius: 6px;
   padding: 24px;
   box-sizing: border-box;
+  margin-bottom: 10px;
 `;
 
-const PSTitle = styled.h2`
+const PSTitle = styled(Link)`
   color: #122434;
   font-size: 16px;
   font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
 `;
 
 const Separator = styled.div`

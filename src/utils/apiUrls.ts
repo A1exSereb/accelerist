@@ -11,4 +11,5 @@ export const apiUrls = {
   contacts: '/contacts',
   scoops: '/scoops',
   news: '/news',
+  savedList: '/saved-list',
 };

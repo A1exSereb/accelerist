@@ -8,16 +8,14 @@ import { useSelector } from 'react-redux';
 import { getCompaniesFavorites, getCompaniesFavoritesMeta } from 'store/ducks/companies/selectors';
 import SearchItem from 'components/SearchItem/SearchItems';
 import { getFavoriteCompaniesThunk } from 'store/ducks/companies/thunk';
+import HeaderBackArrow from 'components/HeaderBackArrow/HeaderBackArrow';
 
 const Favorites = () => {
   const favoritesMeta = useSelector(getCompaniesFavoritesMeta);
   const favoritesData = useSelector(getCompaniesFavorites);
   return (
     <>
-      <MainSubheader
-        label="Favorites"
-        leftChildren={<BackArrow src={ArrowIcon} onClick={() => history.back()} />}
-      />
+      <MainSubheader label="Favorites" leftChildren={<HeaderBackArrow />} />
       <Wrapper>
         <HeaderContainer>
           <HeaderText>{`Found ${favoritesMeta.totalItems} companies`}</HeaderText>

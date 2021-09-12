@@ -1,18 +1,23 @@
 import React from 'react';
 import styled from 'styled-components';
 import ArrowSVG from 'assets/images/icons/pagArrow.svg';
-import { Meta } from 'types';
+import { Filters, Meta } from 'types';
 import { useDispatch } from 'react-redux';
+import { AsyncThunk } from '@reduxjs/toolkit';
 
-const SearchPaginationSwitcher: React.FC<{ limit: number; meta: Meta; asyncAction: any }> = ({
+interface SearchPaginationSwitchedProps {
+  limit: number;
+  meta: Meta;
+  asyncAction: AsyncThunk<any, any, any>;
+  filters?: Filters;
+}
+
+const SearchPaginationSwitcher: React.FC<SearchPaginationSwitchedProps> = ({
   limit,
   meta,
   asyncAction,
-}: {
-  limit: number;
-  meta: Meta;
-  asyncAction: any;
-}) => {
+  filters,
+}: SearchPaginationSwitchedProps) => {
   const dispatch = useDispatch();
   const currentRange = () => {
     const start = (Number(meta.currentPage) - 1) * Number(meta.itemsPerPage) + 1;
@@ -28,6 +33,7 @@ const SearchPaginationSwitcher: React.FC<{ limit: number; meta: Meta; asyncActio
             asyncAction({
               page: Number(meta.currentPage) + 1,
               limit: limit,
+              ...filters,
             })
           );
         break;
@@ -37,6 +43,7 @@ const SearchPaginationSwitcher: React.FC<{ limit: number; meta: Meta; asyncActio
             asyncAction({
               page: Number(meta.currentPage) - 1,
               limit: limit,
+              ...filters,
             })
           );
         break;

@@ -6,15 +6,22 @@ import {
   Filters,
   GetCompaniesRequest,
   GetFavoritesCompaniesDto,
+  GetProspectsDto,
+  GetProspectsRequest,
   News,
+  Prospect,
+  SaveProspectDto,
+  SaveProspectRequest,
   Scoop,
   SearchCompaniesDto,
   SignInDto,
+  UpdateProspectDto,
 } from 'types';
 import { components } from 'types/global-types';
 import { apiUrls } from 'utils/apiUrls';
 import httpClient from 'utils/axiosInstance';
 import queryString from 'query-string';
+import { getSingleProspect } from 'store/ducks/prospects/selectors';
 
 const paramsToQueryString = (hash: any) => {
   const params = queryString.stringify(hash, {
@@ -24,8 +31,8 @@ const paramsToQueryString = (hash: any) => {
   return params ? `?${params}` : '';
 };
 
-/* const myUrlSearchParams = (init: Record<string, string | number | boolean | string[]>) =>
-  new URLSearchParams(init as Record<string, string>); */
+const myUrlSearchParams = (init: Record<string, string | number | boolean | string[]>) =>
+  new URLSearchParams(init as Record<string, string>);
 
 export const Api = {
   async signIn(payload: SignInDto): Promise<AuthorizationRequest> {
@@ -147,6 +154,45 @@ export const Api = {
     const { id } = payload;
     const request = await httpClient.get<{ id: string }, AxiosResponse<News[]>>(
       apiUrls.companies + `/${id}` + apiUrls.news
+    );
+
+    return request.data;
+  },
+  async getProspects(payload: GetProspectsDto): Promise<GetProspectsRequest> {
+    const { page, limit, sort } = payload;
+    const request = await httpClient.get<GetProspectsDto, AxiosResponse<GetProspectsRequest>>(
+      apiUrls.savedList + `?page=${page}&limit=${limit}${sort && `&sort=${sort}`}`
+    );
+
+    return request.data;
+  },
+  async saveProspects(payload: SaveProspectDto): Promise<SaveProspectRequest> {
+    const request = await httpClient.post<SaveProspectDto, AxiosResponse<SaveProspectRequest>>(
+      apiUrls.savedList,
+      payload
+    );
+
+    return request.data;
+  },
+  async deleteProspects(payload: { id: string }): Promise<{ status: string }> {
+    const request = await httpClient.delete<{ id: string }, AxiosResponse<{ status: string }>>(
+      apiUrls.savedList + `/${payload.id}`
+    );
+
+    return request.data;
+  },
+  async getSingleProspect(payload: { id: string }): Promise<Prospect> {
+    const request = await httpClient.get<{ id: string }, AxiosResponse<Prospect>>(
+      apiUrls.savedList + `/${payload.id}`
+    );
+
+    return request.data;
+  },
+  async updateSingleProspect(payload: UpdateProspectDto): Promise<Prospect> {
+    const { filters, name, id, prospectsAvailable } = payload;
+    const request = await httpClient.patch<UpdateProspectDto, AxiosResponse<Prospect>>(
+      apiUrls.savedList + `/${id}`,
+      { filters, name, prospectsAvailable }
     );
 
     return request.data;
