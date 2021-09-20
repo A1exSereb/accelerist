@@ -3,8 +3,9 @@ import styled from 'styled-components';
 import FiltersList from 'components/FilterList';
 import Avatar from 'assets/images/icons/ava.svg';
 import { Prospect } from 'types';
-import dateformat from 'dateformat';
+import dayjs from 'dayjs';
 import { Link } from 'react-router-dom';
+import { firstLatterToUpperCase } from 'utils';
 
 export const ProspectsItem: React.FC<{ prospect: Prospect }> = ({
   prospect,
@@ -38,14 +39,12 @@ export const ProspectsItem: React.FC<{ prospect: Prospect }> = ({
           <img src={Avatar} style={{ marginRight: 5, borderRadius: 25 }} />
           <NameContainer>
             <BlackText>{getAuthorName()}</BlackText>
-            <GrayText>
-              {prospect.lastAuthor.role[0].toUpperCase() + prospect.lastAuthor.role.slice(1)}
-            </GrayText>
+            <GrayText>{firstLatterToUpperCase(prospect.lastAuthor.role)}</GrayText>
           </NameContainer>
         </div>
         <DateContainer>
           <GrayText>Last Activity</GrayText>
-          <BlackText>{dateformat(prospect.lastAuthor.loggedInAt, 'd mmm yyyy')}</BlackText>
+          <BlackText>{dayjs(prospect.lastAuthor.loggedInAt).format('D MMM YYYY')}</BlackText>
         </DateContainer>
       </Footer>
     </PSContainer>
@@ -56,6 +55,9 @@ const PSContainer = styled.div`
   width: 49%;
   background-color: #fff;
   border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   padding: 24px;
   box-sizing: border-box;
   margin-bottom: 10px;

@@ -2,44 +2,57 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Sort } from 'types';
 import ShowArrow from 'assets/images/icons/pagArrow.svg';
+import { ActionMeta } from 'react-select';
+import Select from 'react-select';
+import { filtersSelectStyles } from 'styled/styled';
+import { SelectOption } from 'ui/types';
 
 interface ProspectFiltersProps {
   sort: Sort;
   setSort: React.Dispatch<React.SetStateAction<Sort>>;
 }
 
-const ProspectsFilters = ({ sort, setSort }: ProspectFiltersProps) => {
-  const [showSort, setShowSort] = useState(false);
+const filterOptions = [
+  { value: Sort.alphabet, label: Sort.alphabet },
+  { value: Sort.available, label: Sort.available },
+  { value: Sort['last-activity'], label: Sort['last-activity'] },
+];
 
-  const toggleSort = (sortBy: Sort) => {
-    setSort(sortBy);
-    setShowSort(false);
+const ProspectsFilters = ({ sort, setSort }: ProspectFiltersProps) => {
+  const toggleSort = (
+    inputValue: {
+      value: Sort;
+      label: Sort;
+    } | null,
+    {
+      action,
+    }: ActionMeta<{
+      value: Sort;
+      label: Sort;
+    }>
+  ) => {
+    inputValue && setSort(inputValue.value);
   };
 
   return (
     <FiltersContainer>
       <Container>
-        <Text>Sort by</Text>
-        <Arrow src={ShowArrow} onClick={() => setShowSort(!showSort)} active={showSort} />
-        {showSort && (
-          <ListContainer>
-            <Ul>
-              <Li
-                onClick={() => {
-                  toggleSort(Sort.alphabet);
-                }}
-              >
-                {Sort.alphabet}
-              </Li>
-              <Li onClick={() => toggleSort(Sort.available)}>{Sort.available}</Li>
-              <Li onClick={() => toggleSort(Sort['last-activity'])}>{Sort['last-activity']}</Li>
-            </Ul>
-          </ListContainer>
-        )}
-      </Container>
-      <Container>
-        <Text>Filter By</Text>
-        <Arrow src={ShowArrow} onClick={() => setShowSort(!showSort)} active={showSort} />
+        <Select
+          options={filterOptions}
+          components={{ IndicatorSeparator: () => null }}
+          onChange={toggleSort}
+          placeholder="Sort by"
+          styles={filtersSelectStyles}
+          isSearchable={false}
+        />
+        <Select
+          options={filterOptions}
+          placeholder="Filter by"
+          components={{ IndicatorSeparator: () => null }}
+          onChange={toggleSort}
+          styles={filtersSelectStyles}
+          isSearchable={false}
+        />
       </Container>
     </FiltersContainer>
   );
@@ -92,11 +105,10 @@ const Container = styled.div`
   display: flex;
   position: relative;
   align-items: center;
-  width: 82px;
+  width: 300px;
 `;
 
-const Arrow = styled.img<{ active: boolean }>`
-  transform: ${(props) => (props.active ? 'rotate(90deg)' : 'rotate(-90deg)')};
+const Arrow = styled.img`
   transition: 0.7s;
   cursor: pointer;
 `;

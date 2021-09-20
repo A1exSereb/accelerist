@@ -35,26 +35,28 @@ const myUrlSearchParams = (init: Record<string, string | number | boolean | stri
   new URLSearchParams(init as Record<string, string>);
 
 export const Api = {
-  async signIn(payload: SignInDto): Promise<AuthorizationRequest> {
+  async signIn(payload: SignInDto): Promise<AxiosResponse<AuthorizationRequest>> {
     const request = await httpClient.post<SignInDto, AxiosResponse<AuthorizationRequest>>(
       apiUrls.SignInUrl,
       payload
     );
     console.log('signIn request', request);
 
-    return request.data;
+    return request;
   },
-  async signUp(payload: components['schemas']['SignUpDto']): Promise<AuthorizationRequest> {
+  async signUp(
+    payload: components['schemas']['SignUpDto']
+  ): Promise<AxiosResponse<AuthorizationRequest>> {
     const request = await httpClient.post<SignInDto, AxiosResponse<AuthorizationRequest>>(
       apiUrls.SignUpUrl,
       payload
     );
     console.log('signUp request', request);
 
-    return request.data;
+    return request;
   },
 
-  async passwordChangeRequest(payload: { email: string }): Promise<AxiosResponse> {
+  async passwordChangeRequest(payload: { email: string }): Promise<AxiosResponse<AxiosResponse>> {
     const request = await httpClient.post<{ email: string }, AxiosResponse>(
       apiUrls.ChangePasswordEmail,
       payload
@@ -166,20 +168,20 @@ export const Api = {
 
     return request.data;
   },
-  async saveProspects(payload: SaveProspectDto): Promise<SaveProspectRequest> {
+  async saveProspects(payload: SaveProspectDto): Promise<AxiosResponse<SaveProspectRequest>> {
     const request = await httpClient.post<SaveProspectDto, AxiosResponse<SaveProspectRequest>>(
       apiUrls.savedList,
       payload
     );
 
-    return request.data;
+    return request;
   },
-  async deleteProspects(payload: { id: string }): Promise<{ status: string }> {
+  async deleteProspects(payload: { id: string }): Promise<AxiosResponse<{ status: string }>> {
     const request = await httpClient.delete<{ id: string }, AxiosResponse<{ status: string }>>(
       apiUrls.savedList + `/${payload.id}`
     );
 
-    return request.data;
+    return request;
   },
   async getSingleProspect(payload: { id: string }): Promise<Prospect> {
     const request = await httpClient.get<{ id: string }, AxiosResponse<Prospect>>(

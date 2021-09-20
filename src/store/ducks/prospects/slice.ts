@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { toast } from 'react-toastify';
 import { Loading, LoadingStatus, StoreSlice } from 'store/types/StoreSlice';
 import { Meta, Prospect } from 'types';
 import {
@@ -52,10 +53,12 @@ const prospectsSlice = createSlice({
         state.prospects.items = action.payload.items;
         state.prospects.meta = action.payload.meta;
         state.loading = Loading.fulfilled;
+        toast.success('Loading success');
       })
       .addCase(getProspectsThunk.rejected, (state, action) => {
         state.error = true;
         state.loading = Loading.rejected;
+        toast.error('Loading error');
       })
       .addCase(saveProspectsThunk.pending, (state, action) => {
         state.loading = Loading.pending;

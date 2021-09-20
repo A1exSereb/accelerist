@@ -57,8 +57,9 @@ const ProspectSingleTitle = ({ prospect }: ProspectSingleTitleProps) => {
                 <ButtonUI
                   buttonCSS={EditButtonCss}
                   wrapperCSS={WrapperButtonCss}
+                  type="submit"
                   content={
-                    <Container onClick={() => handleSubmit()}>
+                    <Container>
                       <EditImg src={PenImg} />
                       <EditText>Edit</EditText>{' '}
                     </Container>
@@ -68,6 +69,7 @@ const ProspectSingleTitle = ({ prospect }: ProspectSingleTitleProps) => {
                   buttonCSS={DeleteButtonCss}
                   content="Delete"
                   wrapperCSS={WrapperButtonCss}
+                  type="button"
                   onClick={() => {
                     dispatch(deleteProspectsThunk({ id: prospect.id }));
                     history.push('/prospects');

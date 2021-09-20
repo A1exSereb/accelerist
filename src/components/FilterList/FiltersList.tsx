@@ -16,17 +16,21 @@ export const FiltersList: React.FC<FiltersListProps> = ({ filters }: FiltersList
     <>
       <FiltersText>Filters</FiltersText>
       <FiltersContainer>
-        {Object.values(filters)
-          .slice(0, 4)
-          .map((key) => (
-            <ButtonUI
-              buttonCSS={ThirdButton}
-              wrapperCSS={FilerBtnWrapper}
-              disabled={false}
-              key={uuidv4()}
-              content={key}
-            />
-          ))}
+        {Object.values(filters).length > 0 ? (
+          Object.values(filters)
+            .slice(0, 4)
+            .map((key) => (
+              <ButtonUI
+                buttonCSS={ThirdButton}
+                wrapperCSS={FilerBtnWrapper}
+                disabled={false}
+                key={uuidv4()}
+                content={key}
+              />
+            ))
+        ) : (
+          <FiltersText>No filters</FiltersText>
+        )}
       </FiltersContainer>
     </>
   );

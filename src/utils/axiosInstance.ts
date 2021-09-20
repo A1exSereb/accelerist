@@ -3,10 +3,10 @@ import { Store } from 'redux';
 import { RootState } from 'store/rootReducer';
 
 const httpClient = axios.create({
-  baseURL: process.env.REACT_APP_WEBSITE_NAME,
+  baseURL: process.env.REACT_APP_BASE_URL,
   headers: { 'Content-type': 'application/json' },
 });
-console.log('env proc', process.env.REACT_APP_WEBSITE_NAME);
+console.log('env proc', process.env.REACT_APP_BASE_URL);
 export default httpClient;
 
 export const setupInterceptors = (store: Store) => {

@@ -8,6 +8,7 @@ import Company from 'pages/Main/Company/Company';
 import Favorites from 'pages/Main/Favorites';
 import Prospects from 'pages/Main/Prospects';
 import SingleProspect from 'pages/Main/Prospects/components/ProspectsSingle';
+import { ToastContainer } from 'react-toastify';
 
 const MainRouter: React.FC = () => {
   return (
@@ -39,6 +40,7 @@ const MainRouter: React.FC = () => {
         </MainLayoutNoSearch>
       </Route>
       <Redirect to="/dashboard" />
+      <ToastContainer autoClose={5000} />
     </Switch>
   );
 };

@@ -8,6 +8,8 @@ import { Field } from 'react-final-form';
 import styled, { css } from 'styled-components';
 import TextInput from 'ui/TextInput';
 import { formatValueEnum } from 'ui/types';
+import FieldReactSelect from 'components/fields/FieldReactSelectMultiselect/FieldReactSelectMultiselect';
+import { formSelectStyles } from 'styled/styled';
 
 export const FiltersCompany = () => {
   const goalOptions = useMemo(
@@ -44,8 +46,10 @@ export const FiltersCompany = () => {
           name="scope"
           label="Scope"
           placeholder="Select.."
-          component={FieldSingleSelect}
+          component={FieldReactSelect}
+          styles={formSelectStyles}
           options={scopeOptions}
+          isSearchable
         />
         <Field
           name="sdgGoals"
