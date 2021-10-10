@@ -3,8 +3,10 @@ import styled from 'styled-components';
 import DashboardHeader from './DashboardHeader';
 import pnImage from 'assets/images/prospect-navigator/img.png';
 import { v4 as uuidv4 } from 'uuid';
+import { useHistory } from 'react-router';
 
 const ProspectNavigator: React.FC = () => {
+  const history = useHistory();
   const prArr = [
     {
       img: pnImage,
@@ -31,9 +33,13 @@ const ProspectNavigator: React.FC = () => {
       date: '2 Sep 2020, 13:23',
     },
   ];
+
+  const dashboardHeaderProps = {
+    label: 'Prospecting Navigator',
+  };
   return (
     <>
-      <DashboardHeader label="Prospect Navigator" />
+      <DashboardHeader {...dashboardHeaderProps} />
       <Container>
         {prArr.map((pr) => (
           <Item key={uuidv4()}>

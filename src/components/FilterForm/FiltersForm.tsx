@@ -37,7 +37,7 @@ const FiltersForm: React.FC<FiltersFormProps> = ({ onClose }: FiltersFormProps) 
     const filters = window.btoa(JSON.stringify(values));
 
     push(`${location.pathname}?${queryString.stringify({ filters: filters })}`);
-
+    console.log('NEW INPUT SCOPE', values?.scope);
     return dispatch(getSearchedCompaniesThunk({ page: 1, limit: 12, ...values }));
   };
 

@@ -122,7 +122,5 @@ const companiesSlice = createSlice({
       });
   },
 });
-
-export const { setFilters } = companiesSlice.actions;
-
 export default companiesSlice.reducer;
+export const { setFilters } = companiesSlice.actions;

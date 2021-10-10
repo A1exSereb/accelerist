@@ -6,6 +6,22 @@ export enum Gender {
   'both' = 'both',
 }
 
+export enum Sort {
+  'alphabet' = 'alphabet',
+  'last-activity' = 'last-activity',
+  'available' = 'available',
+}
+
+export type Prospect = {
+  id: string;
+  name?: string;
+  filters: Filters;
+  prospectsAvailable: number;
+  createdAt: string;
+  updatedAt: string;
+  lastAuthor: User;
+};
+
 export type User = {
   id: string;
   email: string;
@@ -193,6 +209,15 @@ export type Company2 = {
   age: string | null;
 };
 
+export type Team = {
+  id: string;
+  ownerId: string;
+  catalistId?: string;
+  organizationName?: string;
+  owner: User;
+  members: User[];
+};
+
 export type SignInDto = {
   email: string;
   password: string;
@@ -202,3 +227,37 @@ export type AuthorizationRequest = {
   accessToken: string;
   user: User;
 };
+
+export interface GetProspectsRequest {
+  items: Prospect[];
+  meta: Meta;
+}
+
+export interface GetProspectsDto {
+  page: number;
+  limit: number;
+  sort?: Sort;
+}
+
+export interface SaveProspectDto {
+  filters: Filters;
+  prospectsAvailable: number;
+}
+
+export interface SaveProspectRequest {
+  filters: Filters;
+  prospectsAvailable: number;
+  team: Team;
+  lastAuthor: User;
+  name?: string;
+  id: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface UpdateProspectDto {
+  filters: Filters;
+  prospectsAvailable: number;
+  id: string;
+  name: string;
+}

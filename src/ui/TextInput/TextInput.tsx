@@ -1,9 +1,9 @@
 import React from 'react';
 import { FieldRenderProps } from 'react-final-form';
-import styled, { FlattenSimpleInterpolation } from 'styled-components';
+import styled, { CSSProp, FlattenSimpleInterpolation } from 'styled-components';
 import { TextInputProps } from 'ui/types';
 
-const TextInput: React.FC<FieldRenderProps<string, HTMLElement>> = ({
+const TextInput: React.FC<FieldRenderProps<string, HTMLElement> & TextInputProps> = ({
   label,
   error,
   leftChild,
@@ -16,6 +16,7 @@ const TextInput: React.FC<FieldRenderProps<string, HTMLElement>> = ({
   input,
   ...rest
 }: TextInputProps) => {
+  console.log('input css', inputCSS);
   return (
     <Wrapper $CSS={wrapperCSS}>
       <Container $CSS={containerCSS}>
@@ -25,9 +26,9 @@ const TextInput: React.FC<FieldRenderProps<string, HTMLElement>> = ({
           <Input
             placeholder={placeholder}
             $error={meta.touched && meta.error ? true : false}
+            $CSS={inputCSS}
             {...input}
             {...rest}
-            $CSS={inputCSS}
           />
           {rightChild && <div>{rightChild}</div>}
         </div>
@@ -58,7 +59,7 @@ const Container = styled('div')<{ $CSS?: FlattenSimpleInterpolation }>`
   ${(props) => (props.$CSS ? { ...props.$CSS } : {})}
 `;
 
-const Input = styled('input')<{ $CSS?: FlattenSimpleInterpolation; $error: boolean }>`
+const Input = styled('input')<{ $CSS?: CSSProp; $error?: boolean }>`
   width: 100%;
   height: 36px;
   font-weight: 400;
@@ -68,5 +69,5 @@ const Input = styled('input')<{ $CSS?: FlattenSimpleInterpolation; $error: boole
   padding: 10px;
   background-color: ${(props) => props.$error && '#FFF2F2'};
   border-color: ${(props) => props.$error && '#F05658'};
-  ${(props) => (props.$CSS ? { ...props.$CSS } : {})}
+  ${(props) => (props.$CSS ? props.$CSS : {})}
 `;

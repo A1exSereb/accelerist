@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { getSearchCompaniesMeta } from 'store/ducks/companies/selectors';
+import { useDispatch, useSelector } from 'react-redux';
+import { getSearchCompaniesMeta, getSearchFilters } from 'store/ducks/companies/selectors';
 import styled from 'styled-components';
 import mailIcon from 'assets/images/icons/search/mail.svg';
 import saveListIcon from 'assets/images/icons/search/folder-plus.svg';
@@ -9,6 +9,7 @@ import uploadIcon from 'assets/images/icons/search/upload.svg';
 import IconSignature from 'ui/IconSignature/IconSignature';
 import SearchPaginationSwitcher from './SearchPaginationSwitcher';
 import { getSearchedCompaniesThunk } from 'store/ducks/companies/thunk';
+import { saveProspectsThunk } from 'store/ducks/prospects/thunk';
 
 interface SearchHeaderProps {
   limit: number;
@@ -20,12 +21,20 @@ const SearchHeader: React.FC<SearchHeaderProps> = ({
   showSupportModal,
 }: SearchHeaderProps) => {
   const searchMeta = useSelector(getSearchCompaniesMeta);
+  const filters = useSelector(getSearchFilters);
+  const dispatch = useDispatch();
   return (
     <HeaderContainer>
       <HeaderText>{`Found ${searchMeta.totalItems} companies`}</HeaderText>
       <Container>
         <SignatureContainer>
-          <IconSignature iconSource={saveListIcon} label="Save List" />
+          <IconSignature
+            iconSource={saveListIcon}
+            onClick={() =>
+              dispatch(saveProspectsThunk({ filters, prospectsAvailable: searchMeta.itemCount }))
+            }
+            label="Save List"
+          />
           <IconSignature iconSource={uploadIcon} label="Export to Excel" />
           <IconSignature
             iconSource={mailIcon}
